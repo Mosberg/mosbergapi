@@ -6,7 +6,11 @@ const CONFIG = {
   REPO_OWNER: "Mosberg",
   REPO_NAME: "mosbergapi",
   BRANCH: "main",
-  FILES_TO_LOAD: ["README.md", "CONTRIBUTING.md", "CHANGELOG.md"],
+  FILES_TO_LOAD: [
+    "https://raw.githubusercontent.com/Mosberg/mosbergapi/main/README.md",
+    "https://raw.githubusercontent.com/Mosberg/mosbergapi/main/CONTRIBUTING.md",
+    "https://raw.githubusercontent.com/Mosberg/mosbergapi/main/CHANGELOG.md",
+  ],
 };
 
 // ==========================================
