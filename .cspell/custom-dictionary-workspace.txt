@@ -24,6 +24,7 @@ Mosberg
 mosbergapi
 MosbergApi
 MOSBERGNBT
+mymod
 outtarget
 println
 resourcepack
