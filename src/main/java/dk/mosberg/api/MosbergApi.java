@@ -19,12 +19,16 @@ public class MosbergApi implements ModInitializer {
 		LOGGER.info("Initializing MosbergAPI");
 
 		// Initialize all registries
+		// Order can be important due to dependencies
+		// Initialize blocks and items first
+		// then entities, particles, and sounds
+		// finally item groups
 		MosbergBlocks.initialize();
 		MosbergItems.initialize();
 		MosbergEntities.initialize();
-		MosbergItemGroups.initialize();
 		MosbergParticles.initialize();
 		MosbergSounds.initialize();
+		MosbergItemGroups.initialize();
 
 		LOGGER.info("MosbergAPI initialized successfully");
 	}
