@@ -36,10 +36,12 @@ public class MosbergApiRecipeProvider extends MosbergRecipeProvider {
         public void generate() {
             // Add your recipes here using the helper methods below
 
-            // Example usage:
-            // generateToolRecipes();
-            // generateBlockRecipes();
-            // generateSmeltingRecipes();
+            generateToolRecipes();
+            generateBlockRecipes();
+            generateSmeltingRecipes();
+            generateCookingRecipes();
+            generateTagRecipes();
+            generateConditionalRecipes();
         }
 
         // ==================== TOOL RECIPES ====================
