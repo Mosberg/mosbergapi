@@ -422,8 +422,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Note**: This is a library mod and does not add any content to the game on its own. It's designed to be used by other mods as a dependency.
 
-Made with ❤️ for the Minecraft modding community
-
-```
-
-```
+Made with ❤️ by Mosberg for the Minecraft modding community
