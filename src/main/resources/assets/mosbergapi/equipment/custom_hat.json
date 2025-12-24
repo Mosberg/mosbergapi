@@ -1,0 +1,8 @@
+{
+  "layers": {
+    "humanoid": {
+      "texture": "mosbergapi:custom_hat"
+    }
+  },
+  "asset_id": "mosbergapi:custom_hat"
+}

@@ -1,0 +1,6 @@
+{
+  "custom_sounds": {
+    "category": "block",
+    "sounds": ["mosbergapi:custom_sounds"]
+  }
+}

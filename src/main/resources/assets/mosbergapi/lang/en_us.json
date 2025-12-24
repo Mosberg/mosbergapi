@@ -1,0 +1,13 @@
+{
+  "itemGroup.mosbergapi.mosberg_group": "MosbergAPI",
+
+  "block.mosbergapi.custom_block": "Custom Block",
+  "item.mosbergapi.custom_item": "Custom Item",
+  "item.mosbergapi.custom_hat": "Custom Hat",
+  "entity.mosbergapi.custom_entity": "Custom Entity",
+
+  "subtitles.mosbergapi.custom_sound": "Custom Sound",
+
+  "advancement.mosbergapi.root.title": "MosbergAPI",
+  "advancement.mosbergapi.root.description": "The beginning of something great"
+}

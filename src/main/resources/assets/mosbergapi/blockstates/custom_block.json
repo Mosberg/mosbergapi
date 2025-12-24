@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "mosbergapi:block/custom_block"
+    }
+  }
+}

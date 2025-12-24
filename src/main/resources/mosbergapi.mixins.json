@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "dk.mosberg.api.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": ["MosbergMixin"],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "authors": ["${mod_author}"],
+  "contact": {
+    "homepage": "${mod_homepage}",
+    "sources": "${mod_sources}",
+    "issues": "${mod_issues}"
+  },
+  "license": "${mod_license}",
+  "icon": "assets/mosbergapi/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["dk.mosberg.api.MosbergApi"],
+    "client": ["dk.mosberg.api.client.MosbergApiClient"],
+    "fabric-datagen": ["dk.mosberg.api.client.data.MosbergApiDataGenerator"]
+  },
+  "mixins": [
+    "mosbergapi.mixins.json",
+    {
+      "config": "mosbergapi.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}",
+    "java": ">=21"
+  },
+  "optional": {
+    "cloth-config": "*",
+    "modmenu": "*"
+  }
+}
