@@ -12,6 +12,6 @@ public class DocumentationGenerator {
     }
 
     public static void generateWiki(Path output) {
-        // Generate wiki pages for GitHub
+        // Generate wiki pages for GitHub or similar platforms
     }
 }
