@@ -1,6 +1,0 @@
-{
-  "custom_sound": {
-    "sounds": ["mosbergapi:custom_sounds_file"],
-    "subtitle": "subtitles.mosbergapi.custom_sound"
-  }
-}
