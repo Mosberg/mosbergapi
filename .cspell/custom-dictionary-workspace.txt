@@ -6,11 +6,13 @@ DEEPSLATE
 dstrgb
 fabricmc
 getenv
+gradlew
 gson
 Heightmap
 intarget
 jvmargs
 Millis
+Moddingx
 modmenu
 mojang
 mosberg
@@ -28,3 +30,4 @@ srcrgb
 Terraformers
 terraformersmc
 Xdoclint
+yourmod
