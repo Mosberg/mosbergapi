@@ -1,6 +1,8 @@
 # Custom Dictionary Words
+Adoptium
 assertj
 blit
+blockstates
 datagen
 DEEPSLATE
 dstrgb
@@ -11,6 +13,8 @@ gson
 Heightmap
 intarget
 jvmargs
+Knockback
+mcmeta
 Millis
 Moddingx
 modmenu
