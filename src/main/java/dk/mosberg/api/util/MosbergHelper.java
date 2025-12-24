@@ -23,6 +23,37 @@ import net.minecraft.world.SpawnHelper;
  *
  * // Item operations
  * ItemStack stack = MosbergHelper.ITEM.createStack(Items.DIAMOND, 64);
+ *
+ * // NBT operations
+ * NbtCompound nbt = MosbergHelper.NBT.toNbt(stack);
+ *
+ * // JSON operations
+ * JsonObject json = MosbergHelper.JSON.parse("{\"key\":\"value\"}");
+ *
+ * // Math operations
+ * int clampedValue = MosbergHelper.MATH.clamp(value, min, max);
+ *
+ * // Color operations
+ * int argb = MosbergHelper.COLOR.Argb.getArgb(255, 0, 255, 0);
+ *
+ * // Time operations
+ * long seconds = MosbergHelper.TIME.SECOND * 60;
+ *
+ * // Network operations
+ * MosbergHelper.NETWORK.sendPacket(player, packet);
+ *
+ * // Recipe operations
+ * Recipe<?> recipe = MosbergHelper.RECIPE.getRecipe(world, id);
+ *
+ * // Tag operations
+ * boolean hasTag = MosbergHelper.TAG.hasTag(item, tag);
+ *
+ * // Attribute operations
+ * MosbergHelper.ATTRIBUTE.modifyAttribute(entity, attribute, amount);
+ *
+ * // Enchantment operations
+ * MosbergHelper.ENCHANTMENT.applyEnchantment(stack, Enchantments.SHARPNESS, 5);
+ *
  * }</pre>
  */
 public class MosbergHelper {
@@ -112,11 +143,58 @@ public class MosbergHelper {
      */
     public static final Class<TimeHelper> TIME = TimeHelper.class;
 
+    /**
+     * Custom helper for network operations (packet sending, channel management, etc.)
+     * <p>
+     * Note: This is an instance-based helper, unlike the other Minecraft helpers.
+     *
+     * @see NetworkHelper
+     */
     public static final NetworkHelper NETWORK = new NetworkHelper();
+
+    /**
+     * Custom helper for NBT operations (reading, writing, modifying NBT data)
+     * <p>
+     * Note: This is an instance-based helper, unlike the other Minecraft helpers.
+     *
+     * @see NBTHelper
+     */
     public static final NBTHelper MOSBERGNBT = new NBTHelper();
+
+    /**
+     * Custom helper for recipe operations (registering, fetching recipes)
+     * <p>
+     * Note: This is an instance-based helper, unlike the other Minecraft helpers.
+     *
+     * @see RecipeHelper
+     */
     public static final RecipeHelper RECIPE = new RecipeHelper();
+
+    /**
+     * Custom helper for tag operations (managing block/item/entity tags)
+     * <p>
+     * Note: This is an instance-based helper, unlike the other Minecraft helpers.
+     *
+     * @see TagHelper
+     */
     public static final TagHelper TAG = new TagHelper();
+
+    /**
+     * Custom helper for attribute operations (modifying entity attributes)
+     * <p>
+     * Note: This is an instance-based helper, unlike the other Minecraft helpers.
+     *
+     * @see AttributeHelper
+     */
     public static final AttributeHelper ATTRIBUTE = new AttributeHelper();
+
+    /**
+     * Custom helper for enchantment operations (applying, removing enchantments)
+     * <p>
+     * Note: This is an instance-based helper, unlike the other Minecraft helpers.
+     *
+     * @see EnchantmentUtil
+     */
     public static final EnchantmentUtil ENCHANTMENT = new EnchantmentUtil();
 
 
