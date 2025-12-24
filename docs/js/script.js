@@ -722,6 +722,18 @@ async function loadGitHubStats() {
 // Error Handling
 // ==========================================
 function showError(message) {
+  let errorRegion = document.getElementById("error-live-region");
+  if (!errorRegion) {
+    errorRegion = document.createElement("div");
+    errorRegion.id = "error-live-region";
+    errorRegion.setAttribute("aria-live", "assertive");
+    errorRegion.setAttribute("role", "alert");
+    errorRegion.style.position = "absolute";
+    errorRegion.style.left = "-9999px";
+    document.body.appendChild(errorRegion);
+  }
+  errorRegion.textContent = message;
+
   const errorHtml = `
         <div class="error-message" style="padding: 3rem; text-align: center; background: var(--color-surface); border-radius: var(--radius-lg); margin: 2rem 0;">
             <h2 style="color: var(--color-danger); margin-bottom: 1rem;">⚠️ Error Loading Documentation</h2>

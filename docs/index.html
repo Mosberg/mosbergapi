@@ -45,13 +45,28 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/gradle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/gradle.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"
+      defer
+    ></script>
 
     <!-- Marked.js for Markdown parsing -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"
+      defer
+    ></script>
   </head>
   <body>
     <!-- Loading Overlay -->
@@ -61,7 +76,7 @@
     </div>
 
     <!-- Navigation Header -->
-    <header class="header" id="header">
+    <header class="header" id="header" role="banner">
       <div class="container">
         <div class="header-content">
           <div class="logo">
@@ -95,7 +110,7 @@
             </svg>
             <span class="logo-text">MosbergAPI</span>
           </div>
-          <nav class="nav-menu" id="navMenu">
+          <nav class="nav-menu" id="navMenu" aria-label="Main navigation">
             <a href="#overview" class="nav-link active">Overview</a>
             <a href="#getting-started" class="nav-link">Getting Started</a>
             <a href="#features" class="nav-link">Features</a>
@@ -178,7 +193,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" aria-label="Project introduction">
       <div class="hero-background"></div>
       <div class="container">
         <div class="hero-content">
@@ -244,11 +259,11 @@
     </section>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <main class="main-content" id="main-content">
       <div class="container">
         <div class="content-wrapper">
           <!-- Sidebar Navigation -->
-          <aside class="sidebar" id="sidebar">
+          <aside class="sidebar" id="sidebar" aria-label="Section navigation">
             <div class="sidebar-sticky">
               <div class="sidebar-search">
                 <input
@@ -319,7 +334,7 @@
           </div>
 
           <!-- Table of Contents -->
-          <aside class="toc" id="toc">
+          <aside class="toc" id="toc" aria-label="Table of contents">
             <div class="toc-sticky">
               <h3 class="toc-title">On This Page</h3>
               <nav class="toc-nav" id="tocNav">
@@ -344,14 +359,17 @@
               <img
                 src="https://img.shields.io/badge/Minecraft-1.21.10-brightgreen.svg"
                 alt="Minecraft Version"
+                loading="lazy"
               />
               <img
                 src="https://img.shields.io/badge/Fabric%20API-0.138.4%2B1.21.10-orange.svg"
                 alt="Fabric API"
+                loading="lazy"
               />
               <img
                 src="https://img.shields.io/badge/License-MIT-yellow.svg"
                 alt="License"
+                loading="lazy"
               />
             </div>
           </div>
@@ -437,6 +455,6 @@
     </button>
 
     <!-- Scripts -->
-    <script src="js/script.js"></script>
+    <script src="js/script.js" defer></script>
   </body>
 </html>

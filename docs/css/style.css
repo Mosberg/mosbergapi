@@ -138,34 +138,37 @@ h6 {
   color: var(--color-text);
 }
 
+
 h1 {
-  font-size: var(--font-size-4xl);
+  font-size: clamp(2rem, 4vw, 2.25rem);
 }
 h2 {
-  font-size: var(--font-size-3xl);
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
 }
 h3 {
-  font-size: var(--font-size-2xl);
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
 }
 h4 {
-  font-size: var(--font-size-xl);
+  font-size: clamp(1.125rem, 2vw, 1.25rem);
 }
 h5 {
-  font-size: var(--font-size-lg);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
 }
 h6 {
   font-size: var(--font-size-base);
 }
 
-p {
-  margin-bottom: var(--spacing-md);
-  color: var(--color-text-secondary);
-}
-
-a {
+  transition: color var(--transition-fast);
   color: var(--color-primary);
   text-decoration: none;
   transition: color var(--transition-fast);
+  outline: none;
+}
+a:hover,
+}
+  color: var(--color-primary-hover);
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 a:hover {
@@ -502,6 +505,7 @@ blockquote {
 /* ==========================================
    Buttons
    ========================================== */
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -514,6 +518,11 @@ blockquote {
   cursor: pointer;
   transition: all var(--transition-fast);
   text-decoration: none;
+  outline: none;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 .btn-large {
@@ -959,6 +968,23 @@ li {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-border-hover);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0f172a;
+    --color-bg-secondary: #1e293b;
+    --color-bg-tertiary: #334155;
+    --color-surface: #1e293b;
+    --color-surface-hover: #334155;
+    --color-text: #f1f5f9;
+    --color-text-secondary: #cbd5e1;
+    --color-text-tertiary: #94a3b8;
+    --color-border: #334155;
+    --color-border-hover: #475569;
+    --color-code-bg: #0f172a;
+    --color-code-text: #f1f5f9;
+  }
 }
 
 /* Selection */
