@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="MosbergAPI - A comprehensive Fabric API library for Minecraft 1.21.10 mod development"
+    />
+    <meta
+      name="keywords"
+      content="Minecraft, Fabric, Mod, API, Development, Java"
+    />
+    <meta name="author" content="Mosberg" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="MosbergAPI Documentation" />
+    <meta
+      property="og:description"
+      content="A comprehensive Fabric API library for Minecraft 1.21.10 mod development"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mosberg.github.io/mosbergapi/" />
+    <meta
+      property="og:image"
+      content="https://mosberg.github.io/mosbergapi/assets/banner.png"
+    />
+
+    <title>MosbergAPI - Minecraft Fabric API Library Documentation</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/png" href="img/favicon.webp" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Highlight.js for code syntax highlighting -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/gradle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
+
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  </head>
+  <body>
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+      <div class="loader"></div>
+      <p>Loading Documentation...</p>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="header" id="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <svg
+              class="logo-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 2L2 7L12 12L22 7L12 2Z"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2 17L12 22L22 17"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2 12L12 17L22 12"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="logo-text">MosbergAPI</span>
+          </div>
+          <nav class="nav-menu" id="navMenu">
+            <a href="#overview" class="nav-link active">Overview</a>
+            <a href="#getting-started" class="nav-link">Getting Started</a>
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#api-reference" class="nav-link">API Reference</a>
+            <a href="#examples" class="nav-link">Examples</a>
+            <a href="#contributing" class="nav-link">Contributing</a>
+            <a href="#changelog" class="nav-link">Changelog</a>
+          </nav>
+          <div class="header-actions">
+            <button
+              class="theme-toggle"
+              id="themeToggle"
+              aria-label="Toggle theme"
+            >
+              <svg
+                class="theme-icon sun-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="M12 1V3M12 21V23M23 12H21M3 12H1M20.07 20.07L18.66 18.66M5.34 5.34L3.93 3.93M20.07 3.93L18.66 5.34M5.34 18.66L3.93 20.07"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <svg
+                class="theme-icon moon-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <a
+              href="https://github.com/Mosberg/mosbergapi"
+              class="btn btn-primary"
+              target="_blank"
+              rel="noopener"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
+                />
+              </svg>
+              GitHub
+            </a>
+          </div>
+          <button
+            class="mobile-menu-toggle"
+            id="mobileMenuToggle"
+            aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-background"></div>
+      <div class="container">
+        <div class="hero-content">
+          <div class="badge">
+            <span class="badge-icon">🚀</span>
+            Version 1.0.0 - Minecraft 1.21.10
+          </div>
+          <h1 class="hero-title">
+            Build Minecraft Mods
+            <span class="gradient-text">Faster & Smarter</span>
+          </h1>
+          <p class="hero-description">
+            A comprehensive Fabric API library providing enhanced registries,
+            powerful utilities, streamlined data generation, and advanced helper
+            systems for Minecraft 1.21.10+ mod development.
+          </p>
+          <div class="hero-actions">
+            <a href="#getting-started" class="btn btn-large btn-primary">
+              Get Started
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path
+                  d="M5 12h14M12 5l7 7-7 7"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://github.com/Mosberg/mosbergapi"
+              class="btn btn-large btn-secondary"
+              target="_blank"
+            >
+              View on GitHub
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <div class="stat-value" id="statsStars">-</div>
+              <div class="stat-label">GitHub Stars</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">15+</div>
+              <div class="stat-label">Utility Helpers</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">80+</div>
+              <div class="stat-label">Registry Types</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value" id="statsCommits">-</div>
+              <div class="stat-label">Commits</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container">
+        <div class="content-wrapper">
+          <!-- Sidebar Navigation -->
+          <aside class="sidebar" id="sidebar">
+            <div class="sidebar-sticky">
+              <div class="sidebar-search">
+                <input
+                  type="text"
+                  id="searchInput"
+                  placeholder="Search documentation..."
+                  class="search-input"
+                />
+                <svg
+                  class="search-icon"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <circle cx="11" cy="11" r="8" stroke-width="2" />
+                  <path
+                    d="M21 21l-4.35-4.35"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </div>
+              <nav class="sidebar-nav" id="sidebarNav">
+                <!-- Dynamically generated navigation -->
+              </nav>
+            </div>
+          </aside>
+
+          <!-- Documentation Content -->
+          <div class="content" id="content">
+            <!-- Content will be dynamically loaded -->
+            <section id="overview" class="content-section">
+              <h2>📖 Overview</h2>
+              <div class="loading-placeholder">Loading content...</div>
+            </section>
+
+            <section id="getting-started" class="content-section">
+              <h2>🚀 Getting Started</h2>
+              <div class="loading-placeholder">Loading content...</div>
+            </section>
+
+            <section id="features" class="content-section">
+              <h2>✨ Features</h2>
+              <div class="loading-placeholder">Loading content...</div>
+            </section>
+
+            <section id="api-reference" class="content-section">
+              <h2>📚 API Reference</h2>
+              <div class="loading-placeholder">Loading content...</div>
+            </section>
+
+            <section id="examples" class="content-section">
+              <h2>💡 Examples</h2>
+              <div class="loading-placeholder">Loading content...</div>
+            </section>
+
+            <section id="contributing" class="content-section">
+              <h2>🤝 Contributing</h2>
+              <div class="loading-placeholder">Loading content...</div>
+            </section>
+
+            <section id="changelog" class="content-section">
+              <h2>📜 Changelog</h2>
+              <div class="loading-placeholder">Loading content...</div>
+            </section>
+          </div>
+
+          <!-- Table of Contents -->
+          <aside class="toc" id="toc">
+            <div class="toc-sticky">
+              <h3 class="toc-title">On This Page</h3>
+              <nav class="toc-nav" id="tocNav">
+                <!-- Dynamically generated TOC -->
+              </nav>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h4>MosbergAPI</h4>
+            <p>
+              A comprehensive Fabric API library for Minecraft mod development.
+            </p>
+            <div class="footer-badges">
+              <img
+                src="https://img.shields.io/badge/Minecraft-1.21.10-brightgreen.svg"
+                alt="Minecraft Version"
+              />
+              <img
+                src="https://img.shields.io/badge/Fabric%20API-0.138.4%2B1.21.10-orange.svg"
+                alt="Fabric API"
+              />
+              <img
+                src="https://img.shields.io/badge/License-MIT-yellow.svg"
+                alt="License"
+              />
+            </div>
+          </div>
+          <div class="footer-section">
+            <h4>Documentation</h4>
+            <ul class="footer-links">
+              <li><a href="#getting-started">Getting Started</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#api-reference">API Reference</a></li>
+              <li><a href="#examples">Examples</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Community</h4>
+            <ul class="footer-links">
+              <li>
+                <a href="https://github.com/Mosberg/mosbergapi" target="_blank"
+                  >GitHub</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://github.com/Mosberg/mosbergapi/issues"
+                  target="_blank"
+                  >Issues</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://github.com/Mosberg/mosbergapi/discussions"
+                  target="_blank"
+                  >Discussions</a
+                >
+              </li>
+              <li><a href="#contributing">Contributing</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Resources</h4>
+            <ul class="footer-links">
+              <li>
+                <a href="https://fabricmc.net/" target="_blank">Fabric MC</a>
+              </li>
+              <li>
+                <a href="https://fabricmc.net/wiki" target="_blank"
+                  >Fabric Wiki</a
+                >
+              </li>
+              <li>
+                <a href="https://minecraft.wiki" target="_blank"
+                  >Minecraft Wiki</a
+                >
+              </li>
+              <li><a href="#changelog">Changelog</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Mosberg. Licensed under MIT License.</p>
+          <p class="last-updated">
+            Last updated: <span id="lastUpdated">Loading...</span>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+      >
+        <path
+          d="M18 15l-6-6-6 6"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+  </body>
+</html>
