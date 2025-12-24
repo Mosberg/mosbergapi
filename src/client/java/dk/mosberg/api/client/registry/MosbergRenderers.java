@@ -9,6 +9,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
+import net.minecraft.client.render.entity.EntityRendererFactories;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.Entity;
@@ -62,8 +63,7 @@ import net.minecraft.util.Identifier;
 public class MosbergRenderers {
 
     private static final Logger LOGGER = LoggerFactory.getLogger("MosbergAPI/Renderers");
-    private static final Map<EntityType<?>, EntityRendererFactory<?>> REGISTERED_ENTITY_RENDERERS =
-            new HashMap<>();
+    private static final Map<EntityType<?>, String> REGISTERED_ENTITY_RENDERERS = new HashMap<>();
     private static final Map<BlockEntityType<?>, String> REGISTERED_BLOCK_ENTITY_RENDERERS =
             new HashMap<>();
     private static final Map<EntityModelLayer, EntityModelLayerRegistry.TexturedModelDataProvider> REGISTERED_MODEL_LAYERS =
@@ -114,8 +114,8 @@ public class MosbergRenderers {
             throw new NullPointerException("Renderer factory cannot be null");
         }
 
-        EntityRendererFactory.register(entityType, rendererFactory);
-        REGISTERED_ENTITY_RENDERERS.put(entityType, rendererFactory);
+        EntityRendererFactories.register(entityType, rendererFactory);
+        REGISTERED_ENTITY_RENDERERS.put(entityType, rendererFactory.getClass().getName());
 
         LOGGER.debug("Registered entity renderer for: {}", entityType);
         return entityType;
@@ -197,9 +197,15 @@ public class MosbergRenderers {
      * entities like chests, signs, or custom machines.
      * </p>
      *
+     * <p>
+     * <strong>Note:</strong> This method uses raw types internally to work around the two-parameter
+     * BlockEntityRendererFactory interface. The renderer factory you provide should match the
+     * signature expected by Minecraft's rendering system.
+     * </p>
+     *
      * @param <T> The block entity type
      * @param blockEntityType The block entity type
-     * @param rendererFactory The renderer factory
+     * @param rendererFactory The renderer factory (lambda or method reference)
      * @return The block entity type for method chaining
      *
      * @throws NullPointerException if blockEntityType or rendererFactory is null
@@ -213,8 +219,9 @@ public class MosbergRenderers {
      * );
      * }</pre>
      */
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public static <T extends BlockEntity> BlockEntityType<T> registerBlockEntityRenderer(
-            BlockEntityType<T> blockEntityType, BlockEntityRendererFactory<T> rendererFactory) {
+            BlockEntityType<T> blockEntityType, BlockEntityRendererFactory rendererFactory) {
 
         if (blockEntityType == null) {
             throw new NullPointerException("Block entity type cannot be null");
@@ -244,8 +251,9 @@ public class MosbergRenderers {
      * @param modelDataProvider Provider for model data
      * @return The block entity type for method chaining
      */
+    @SuppressWarnings("rawtypes")
     public static <T extends BlockEntity> BlockEntityType<T> registerBlockEntityRenderer(
-            BlockEntityType<T> blockEntityType, BlockEntityRendererFactory<T> rendererFactory,
+            BlockEntityType<T> blockEntityType, BlockEntityRendererFactory rendererFactory,
             EntityModelLayer modelLayer,
             EntityModelLayerRegistry.TexturedModelDataProvider modelDataProvider) {
 
@@ -444,9 +452,9 @@ public class MosbergRenderers {
     /**
      * Gets all registered entity types with renderers.
      *
-     * @return Unmodifiable map of registered entity renderers
+     * @return Unmodifiable map of registered entity renderer names
      */
-    public static Map<EntityType<?>, EntityRendererFactory<?>> getRegisteredEntityRenderers() {
+    public static Map<EntityType<?>, String> getRegisteredEntityRenderers() {
         return Map.copyOf(REGISTERED_ENTITY_RENDERERS);
     }
 
@@ -503,7 +511,8 @@ public class MosbergRenderers {
      */
     public static void logRegisteredRenderers() {
         LOGGER.info("=== Registered Entity Renderers ===");
-        REGISTERED_ENTITY_RENDERERS.keySet().forEach(type -> LOGGER.info("  - {}", type));
+        REGISTERED_ENTITY_RENDERERS
+                .forEach((type, factory) -> LOGGER.info("  - {}: {}", type, factory));
 
         LOGGER.info("=== Registered Block Entity Renderers ===");
         REGISTERED_BLOCK_ENTITY_RENDERERS
