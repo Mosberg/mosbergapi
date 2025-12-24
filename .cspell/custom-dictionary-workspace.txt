@@ -4,6 +4,7 @@ ARGB
 assertj
 blit
 blockstates
+chestplate
 datagen
 DEEPSLATE
 dstrgb
