@@ -309,7 +309,7 @@ public class InventoryHelper {
      *
      *          <pre>{@code
      * ItemStack diamonds = new ItemStack(Items.DIAMOND, 100);
-     * ItemStack remaining = addItemToInventory(inventory, diamonds);
+     * ItemStack remaining = InventoryHelper.addItemToInventory(inventory, diamonds);
      *
      * if (remaining.isEmpty()) {
      *     System.out.println("All items inserted successfully");
@@ -322,7 +322,6 @@ public class InventoryHelper {
      * @author Mosberg
      */
     public static ItemStack addItemToInventory(Inventory destination, ItemStack stack) {
-
         if (destination == null) {
             throw new IllegalArgumentException("Destination inventory cannot be null");
         }
@@ -382,4 +381,5 @@ public class InventoryHelper {
         // Return any items that couldn't be inserted
         return remaining.isEmpty() ? ItemStack.EMPTY : remaining;
     }
+
 }
