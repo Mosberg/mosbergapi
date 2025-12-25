@@ -19,9 +19,9 @@ import net.minecraft.client.model.TexturedModelData;
  * @version 1.0.0
  * @since 1.0.0
  */
-public class ModelsHelper {
+public class ModelHelper {
 
-    private ModelsHelper() {
+    private ModelHelper() {
         throw new UnsupportedOperationException("ModelsHelper is a utility class");
     }
 

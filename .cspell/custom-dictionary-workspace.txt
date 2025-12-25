@@ -1,4 +1,7 @@
 # Custom Dictionary Words
+abgr
+Abgr
+ABGR
 Adoptium
 ARGB
 assertj
@@ -21,9 +24,12 @@ getenv
 gradlew
 gson
 Heightmap
+hotbar
+ient
 intarget
 jvmargs
 Knockback
+LEVELUP
 mcmeta
 Millis
 Moddingx
@@ -38,7 +44,10 @@ multitool
 Multitool
 mymod
 outtarget
+PLING
 println
+Regen
+rela
 resourcepack
 shedaniel
 Shedaniel
@@ -48,6 +57,9 @@ Soulbound
 srcrgb
 Terraformers
 terraformersmc
+Tessellator
+ticle
+Unregisters
 vorpal
 Xdoclint
 yourmod
