@@ -2,13 +2,12 @@
 
 > A comprehensive **Fabric API library** for Minecraft 1.21.10+ mod development, designed to eliminate boilerplate code and accelerate mod creation with powerful utilities, enhanced registries, and streamlined tooling.
 
-[![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.10-brightgreen.svg)](https://www.minecraft.net/)
-[![Yarn Mappings](https://img.shields.io/badge/Yarn-1.21.10+build.3-blue.svg)](https://maven.fabricmc.net/)
-[![Fabric API](https://img.shields.io/badge/Fabric%20API-0.138.4%2B1.21.10-orange.svg)](https://fabricmc.net/)
-[![Fabric Loader](https://img.shields.io/badge/Fabric%20Loader-0.18.3-orange.svg)](https://fabricmc.net/)
-[![Fabric Loom](https://img.shields.io/badge/Fabric%20Loom-1.14.10-orange.svg)](https://github.com/FabricMC/fabric-loom)
-[![Java](https://img.shields.io/badge/Java-21-blue.svg)](https://adoptium.net/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Minecraft Version](https://img.shields.io/badge/Minecraft-1.21.10-brightgreen?style=flat-square)](https://www.minecraft.net/)
+[![Fabric API](https://img.shields.io/badge/Fabric%20API-0.138.4+-orange?style=flat-square)](https://fabricmc.net/)
+[![Fabric Loader](https://img.shields.io/badge/Fabric%20Loader-0.18.3+-orange?style=flat-square)](https://fabricmc.net/)
+[![Java](https://img.shields.io/badge/Java-21-blue?style=flat-square)](https://adoptium.net/)
+[![Yarn Mappings](https://img.shields.io/badge/Yarn-1.21.10+build.3-blue?style=flat-square)](https://maven.fabricmc.net/)
+[![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
 
 ---
 
@@ -34,10 +33,11 @@
 
 ### What It Does
 
-- ✅ **Simplifies Registration** - Register blocks, items, entities, sounds, and particles with minimal code
-- ✅ **Data Generation** - Auto-generate recipes, loot tables, and models with builders
-- ✅ **Utility Helpers** - 15+ helper classes for inventory, entities, blocks, NBT, and more
-- ✅ **Client-Side Tools** - Rendering utilities and client-specific functionality
+- ✅ **Simplifies Registration** - Register blocks, items, entities, sounds, particles, enchantments, and more with minimal code
+- ✅ **Data Generation** - Auto-generate recipes, loot tables, and models with fluent builders
+- ✅ **27+ Utility Helpers** - Production-ready helpers for inventory, entities, blocks, NBT, particles, and more
+- ✅ **Command System** - Built-in command framework with 8+ pre-made commands
+- ✅ **Client-Side Tools** - Rendering, screen handling, texture, and model utilities
 - ✅ **Event System** - Custom events for mod interactions
 - ✅ **Configuration** - JSON-based config management out of the box
 - ✅ **Type Safety** - Modern Java with records, pattern matching, and null safety annotations
@@ -45,8 +45,8 @@
 
 ### What It's NOT
 
-❌ MosbergAPI adds **no content** to Minecraft by itself
-❌ It's not a gameplay mod—it's a **developer library**
+❌ MosbergAPI adds **no content** to Minecraft by itself  
+❌ It's not a gameplay mod—it's a **developer library**  
 ❌ Not required for vanilla Minecraft—only for mods using it
 
 ---
@@ -55,39 +55,100 @@
 
 ### 🔧 Registry System (`dk.mosberg.api.registry`)
 
-**Simplified registration with type-safe builders:**
+**Simplified registration with type-safe builders for 20+ content types:**
 
-| Class                 | Purpose                                       | Notable Methods                                                                                     |
-| --------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| **MosbergBlocks**     | Block registration with automatic BlockItem   | `register(name, block)`, `register(name, block, createItem)`, `register(name, block, itemSettings)` |
-| **MosbergItems**      | Item registration with centralized management | `register(name, item)`                                                                              |
-| **MosbergEntities**   | Entity type registration with builder pattern | `register(name, builder)`, `keyOf(name)`                                                            |
-| **MosbergItemGroups** | Creative inventory tab management             | `register(name, group)`, `registerSimple(name, displayName, icon)`                                  |
-| **MosbergSounds**     | Sound event registration                      | `register(name)`, `registerWithRange(name, range)`                                                  |
-| **MosbergParticles**  | Custom particle registration                  | `registerSimple(name)`, `registerSimple(name, alwaysShow)`                                          |
-| **MosbergRegistries** | Core registry for 60+ Minecraft registries    | Comprehensive type-safe methods for all content types                                               |
+| Class | Purpose |
+|-------|---------|
+| **MosbergBlocks** | Block registration with automatic BlockItem creation |
+| **MosbergItems** | Item registration with centralized management |
+| **MosbergEntities** | Entity type registration with builder pattern |
+| **MosbergItemGroups** | Creative inventory tab management |
+| **MosbergSounds** | Sound event registration and querying |
+| **MosbergParticles** | Custom particle effect registration |
+| **MosbergBlockEntities** | Block entity type registration |
+| **MosbergFluidS** | Fluid registration (water, lava, custom) |
+| **MosbergEnchantments** | Custom enchantment registration |
+| **MosbergPotions** | Potion effect registration |
+| **MosbergStatusEffects** | Status effect registration |
+| **MosbergDamageTypes** | Custom damage type registration (1.21+) |
+| **MosbergDataComponents** | Data component type registration |
+| **MosbergGameEvents** | Game event registration |
+| **MosbergAttributes** | Entity attribute registration |
+| **MosbergTags** | Tag creation and management |
+| **MosbergVillagers** | Villager profession and type registration |
+| **MosbergWorldGen** | World generation feature registration |
+| **MosbergScreenHandlerTypes** | GUI screen handler registration |
+| **MosbergRecipes** | Recipe type and serializer registration |
+| **MosbergRegistries** | Master registry for 60+ Minecraft registries |
 
 ### 🛠️ Utility Helpers (`dk.mosberg.api.util`)
 
-**15+ production-ready helper classes for common operations:**
+**27+ production-ready helper classes for common operations:**
 
-| Helper                  | Use Cases                                                          |
-| ----------------------- | ------------------------------------------------------------------ |
-| **AttributeHelper**     | Entity attribute modification, damage tracking, speed adjustments  |
-| **BlockHelper**         | Block state queries, neighbor detection, material checks           |
-| **CommandHelper**       | Command registration, argument parsing, result messaging           |
-| **EnchantmentUtil**     | Enchantment compatibility, level detection, application            |
-| **EntityHelper**        | Entity spawning, teleportation, knockback, AI manipulation         |
-| **InventoryHelper**     | Item insertion, transfer between inventories, capacity checks      |
-| **ItemHelper**          | ItemStack manipulation, NBT reading/writing, durability management |
-| **MosbergHelper**       | General utilities (version info, initialization checks)            |
-| **NBTHelper**           | NBT data serialization, type-safe reading/writing                  |
-| **NetworkHelper**       | Custom packet handling, player-specific networking                 |
-| **RecipeHelper**        | Recipe querying at runtime, type filtering                         |
-| **SerializationHelper** | GSON-based serialization for configs                               |
-| **TagHelper**           | Tag creation and querying for items, blocks, fluids                |
-| **WorldHelper**         | World state manipulation, weather control, entity queries          |
-| **DamageTypeHelper**    | Custom damage type management, source detection                    |
+#### Core Utilities
+
+| Helper | Purpose |
+|--------|---------|
+| **BlockHelper** | Block state queries, neighbor detection, material checks |
+| **EntityHelper** | Entity spawning, teleportation, knockback, AI manipulation |
+| **ItemHelper** | ItemStack manipulation, NBT reading/writing, durability |
+| **InventoryHelper** | Item insertion, transfer between inventories, capacity checks |
+| **WorldHelper** | World state manipulation, weather, entity queries, explosions |
+| **NBTHelper** | NBT data serialization, type-safe reading/writing |
+
+#### Attributes & Effects
+
+| Helper | Purpose |
+|--------|---------|
+| **AttributeHelper** | Entity attribute modification, damage tracking, speed |
+| **EnchantmentUtil** | Enchantment compatibility, level detection, application |
+| **StatusEffectHelper** | Status effect application and management |
+| **PotionHelper** | Potion creation, brewing, effect application |
+| **DamageTypeHelper** | Custom damage type management, source detection |
+
+#### Items & Data
+
+| Helper | Purpose |
+|--------|---------|
+| **DataComponentHelper** | Data component manipulation and queries |
+| **TagHelper** | Tag creation and querying for items, blocks, fluids |
+| **RecipeHelper** | Recipe querying at runtime, type filtering |
+| **ItemGroupHelper** | Item group management and customization |
+
+#### Game Mechanics
+
+| Helper | Purpose |
+|--------|---------|
+| **CommandHelper** | Command registration, argument parsing, result messaging |
+| **GameEventHelper** | Game event creation and triggering |
+| **VillagerHelper** | Villager trade management, profession changes |
+| **FluidHelper** | Fluid placement, flowing, bucket operations |
+| **ParticleHelper** | Particle spawning with custom effects |
+| **SoundHelper** | Sound playing, volume, pitch control |
+
+#### Utilities
+
+| Helper | Purpose |
+|--------|---------|
+| **MosbergHelper** | General utilities (version info, initialization checks) |
+| **SerializationHelper** | GSON-based serialization for configs |
+| **NetworkHelper** | Custom packet handling, player-specific networking |
+| **MosbergEnchantmentHelper** | Advanced enchantment utilities |
+
+### 🎮 Command System (`dk.mosberg.api.command`)
+
+**8+ pre-made commands with framework for custom commands:**
+
+| Command | Purpose | Usage |
+|---------|---------|-------|
+| **ItemCommand** | ItemStack inspection and manipulation | `/item <subcommand>` |
+| **EntityCommand** | Entity spawning and management | `/entity <subcommand>` |
+| **BlockCommand** | Block state queries and modification | `/block <subcommand>` |
+| **WorldCommand** | World manipulation (weather, time) | `/world <subcommand>` |
+| **ConfigCommand** | Configuration management | `/config <subcommand>` |
+| **DebugCommand** | Debugging utilities | `/debug <subcommand>` |
+| **RegistryCommand** | Registry inspection | `/registry <subcommand>` |
+| **HelpCommand** | Command documentation | `/help` |
 
 ### 📊 Data Generation (`dk.mosberg.api.data`)
 
@@ -104,25 +165,39 @@
 
 - **MosbergModelProvider** - 1.21+ block and item model generation
 - **MosbergApiModelProvider** - Model template examples
-- **MosbergRenderStatesHelper** - Render state utilities
+- **MosbergApiDataGenerator** - Coordinated data generation
 
 ### 🎨 Client-Side Systems (`dk.mosberg.api.client`)
+
+#### Registries
 
 - **MosbergRenderers** - Entity/block renderer registration with humanoid/quadruped templates
 - **MosbergModels** - Model layer management and creation
 - **MosbergModelLayers** - Pre-defined model layer system
-- **RenderHelper** - Custom rendering, overlays, and GL state management
-- **ModelHelper** - Texture and animation utilities
+- **MosbergRenderStates** - 1.21+ render state system utilities
+- **MosbergScreenHandlers** - GUI screen handler registration
+
+#### Utilities (6 helpers)
+
+| Helper | Purpose |
+|--------|---------|
+| **RenderHelper** | Custom rendering, overlays, GL state management |
+| **ModelHelper** | Model creation, texture, animation utilities |
+| **ModelLayersHelper** | Model layer utilities and templates |
+| **RenderStatesHelper** | 1.21+ render state manipulation |
+| **ScreenHelper** | GUI widget management, event handling |
+| **TextureHelper** | Texture loading, binding, manipulation |
+| **ScreenHandlerHelper** | Screen handler utilities and customization |
 
 ### 🔌 Advanced Systems
 
-| System                                             | Purpose                                               |
-| -------------------------------------------------- | ----------------------------------------------------- |
-| **Event System** (`dk.mosberg.api.event`)          | Custom event framework (BlockMined, PlayerJoin, etc.) |
-| **Config Manager** (`dk.mosberg.api.config`)       | JSON-based configuration with auto-generation         |
-| **Documentation Generator** (`dk.mosberg.api.doc`) | Auto-generate API documentation                       |
-| **Test Framework** (`dk.mosberg.api.test`)         | Helpers for unit testing mods                         |
-| **Mixin System**                                   | Server & client-side mixins for core functionality    |
+| System | Purpose |
+|--------|---------|
+| **Event System** (`dk.mosberg.api.event`) | Custom event framework (BlockMined, PlayerJoin, etc.) |
+| **Config Manager** (`dk.mosberg.api.config`) | JSON-based configuration with auto-generation |
+| **Documentation Generator** (`dk.mosberg.api.doc`) | Auto-generate API documentation |
+| **Test Framework** (`dk.mosberg.api.test`) | Helpers for unit testing mods |
+| **Mixin System** | Server & client-side mixins for core functionality |
 
 ---
 
@@ -131,14 +206,12 @@
 ### For Players
 
 1. **Install Fabric**
-
    ```bash
    # Download Fabric Installer from https://fabricmc.net/use/
    java -jar fabric-installer.jar client
    ```
 
 2. **Install Dependencies**
-
    - Download [Fabric API](https://modrinth.com/mod/fabric-api) (required)
    - Download [MosbergAPI](https://github.com/Mosberg/mosbergapi/releases)
 
@@ -228,11 +301,16 @@ public class YourMod implements ModInitializer {
 
 ```
 MosbergApi (Mod Initializer)
-  ├── Registry System
+  ├── Registry System (20+ registries)
   │   └── MosbergRegistries (60+ registry methods)
-  ├── Utility Helpers (15+ classes)
+  ├── Utility Helpers (27+ classes)
+  ├── Command System (8+ commands)
   ├── Event System
   ├── Configuration Manager
+  ├── Client Systems
+  │   ├── Renderers (entity, block)
+  │   ├── Models (creation, layers)
+  │   └── Client Utilities (6+ helpers)
   └── Data Generators
       ├── Recipes
       └── Loot Tables
@@ -274,31 +352,35 @@ public static final Block SPECIAL_BLOCK = MosbergBlocks.register(
 );
 ```
 
-#### Registering an Entity
+#### Registering Enchantments
 
 ```java
-import dk.mosberg.api.registry.MosbergEntities;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
+import dk.mosberg.api.registry.MosbergEnchantments;
 
-public static final EntityType<CustomEntity> CUSTOM_MOB = MosbergEntities.register(
-    "custom_mob",
-    EntityType.Builder.create(CustomEntity::new, SpawnGroup.CREATURE)
-        .dimensions(0.8f, 1.8f)
-        .maxTrackingRange(64)
-        .updateIntervalMultiplier(3)
+public static final Enchantment CUSTOM_ENCHANTMENT = MosbergEnchantments.register(
+    "custom_enchantment",
+    Enchantment.create(
+        Text.translatable("enchantment.yourmod.custom"),
+        Effects.ATTACK_DAMAGE,
+        1,
+        4,
+        Enchantment.constantCost(10),
+        Enchantment.constantCost(60)
+    )
 );
 ```
 
-#### Accessing the Master Registry
+#### Registering Fluids
 
 ```java
-import dk.mosberg.api.registry.MosbergRegistries;
+import dk.mosberg.api.registry.MosbergFluids;
 
-// Register anything with a single method
-MosbergRegistries.registerStatusEffect("custom_effect", customEffect);
-MosbergRegistries.registerPotion("custom_potion", customPotion);
-MosbergRegistries.registerEnchantmentEffectComponentType("effect", componentType);
+public static final FlowableFluid CUSTOM_FLUID = MosbergFluids.register(
+    "custom_fluid",
+    new FlowableFluid.Flowing(
+        CUSTOM_FLUID_SETTINGS
+    )
+);
 ```
 
 ### Utility Helper Usage
@@ -307,8 +389,6 @@ MosbergRegistries.registerEnchantmentEffectComponentType("effect", componentType
 
 ```java
 import dk.mosberg.api.util.InventoryHelper;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
 
 // Add item to inventory (returns leftovers)
 ItemStack leftovers = InventoryHelper.addItemToInventory(inventory, new ItemStack(Items.DIAMOND, 64));
@@ -323,183 +403,46 @@ boolean hasSpace = InventoryHelper.hasSpace(inventory, new ItemStack(Items.IRON_
 int count = InventoryHelper.countItems(inventory, Items.GOLD_ORE);
 ```
 
-#### Entity Manipulation
+#### Command Registration
 
 ```java
-import dk.mosberg.api.util.EntityHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.Vec3d;
+import dk.mosberg.api.command.MosbergCommands;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
-// Teleport entity
-EntityHelper.teleportEntity(entity, world, new Vec3d(100, 64, 200));
-
-// Apply knockback
-EntityHelper.applyKnockback(entity, 1.5, direction);
-
-// Heal entity
-EntityHelper.healEntity(entity, 5.0f);
-
-// Apply attribute modifier
-EntityHelper.addAttributeModifier(entity, EntityAttributes.GENERIC_SPEED, 0.5);
-```
-
-#### World Operations
-
-```java
-import dk.mosberg.api.util.WorldHelper;
-
-// Check time of day
-if (WorldHelper.isDaytime(world)) {
-    // Only during day
-}
-
-// Set weather
-WorldHelper.setRaining(serverWorld, 6000); // 5 minutes
-
-// Create explosion
-WorldHelper.createExplosion(world, null, pos, 5.0f, true);
-
-// Get nearby entities
-List<Entity> nearby = WorldHelper.getEntitiesInBox(world, new Box(pos, pos.add(16, 16, 16)));
-```
-
-#### NBT Data
-
-```java
-import dk.mosberg.api.util.NBTHelper;
-import net.minecraft.nbt.NbtCompound;
-
-NbtCompound nbt = new NbtCompound();
-
-// Type-safe writing
-NBTHelper.setString(nbt, "name", "Custom Item");
-NBTHelper.setInt(nbt, "level", 5);
-NBTHelper.setDouble(nbt, "power", 2.5);
-
-// Type-safe reading
-String name = NBTHelper.getString(nbt, "name", "Default");
-int level = NBTHelper.getInt(nbt, "level", 0);
-```
-
-### Data Generation
-
-#### Creating Recipes
-
-```java
-import dk.mosberg.api.data.provider.MosbergRecipeProvider;
-import net.minecraft.data.recipe.RecipeGenerator;
-
-public class ModRecipes extends MosbergRecipeProvider {
-    public ModRecipes(DataOutput output,
-                      CompletableFuture<RegistryWrapper.WrapperLookup> registries) {
-        super(output, registries);
-    }
-
-    @Override
-    protected RecipeGenerator getRecipeGenerator(
-            RegistryWrapper.WrapperLookup registries,
-            RecipeExporter exporter) {
-        return new RecipeGenerator(registries, exporter) {
-            @Override
-            public void generate() {
-                // Shaped crafting
-                createShaped(RecipeCategory.TOOLS, ModItems.CUSTOM_SWORD)
-                    .pattern("D")
-                    .pattern("D")
-                    .pattern("S")
-                    .input('D', Items.DIAMOND)
-                    .input('S', Items.STICK)
-                    .criterion(hasItem(Items.DIAMOND), conditionsFromItem(Items.DIAMOND))
-                    .offerTo(exporter);
-
-                // Shapeless crafting
-                createShapeless(RecipeCategory.MISC, ModItems.CUSTOM_DUST)
-                    .input(Items.DIAMOND)
-                    .input(Items.IRON_INGOT)
-                    .input(Items.STONE)
-                    .criterion(hasItem(Items.DIAMOND), conditionsFromItem(Items.DIAMOND))
-                    .offerTo(exporter);
-
-                // Smelting
-                offerSmelting(exporter, List.of(ModBlocks.CUSTOM_ORE),
-                    RecipeCategory.MISC, ModItems.CUSTOM_INGOT,
-                    1.0f, 200, "custom_ingot");
-
-                // Stonecutting
-                createStonecutting(RecipeCategory.BUILDING_BLOCKS,
-                    ModBlocks.CUSTOM_STAIRS, ModBlocks.CUSTOM_BLOCK)
-                    .criterion(hasItem(ModBlocks.CUSTOM_BLOCK),
-                        conditionsFromItem(ModBlocks.CUSTOM_BLOCK))
-                    .offerTo(exporter);
-            }
-        };
-    }
-}
-```
-
-#### Creating Loot Tables
-
-```java
-import dk.mosberg.api.data.provider.MosbergLootTableProvider;
-
-public class ModLootTables extends MosbergLootTableProvider {
-    @Override
-    public void generate() {
-        // Block loot table
-        addBlockLootTable(ModBlocks.CUSTOM_ORE,
-            LootTable.builder()
-                .pool(LootPool.builder()
-                    .rolls(ConstantLootNumberProvider.create(1))
-                    .with(ItemEntry.builder(ModItems.CUSTOM_INGOT)
-                        .apply(SetCountLootFunction.builder(
-                            ConstantLootNumberProvider.create(1))))));
-
-        // Entity loot table
-        addEntityLootTable(ModEntities.CUSTOM_MOB,
-            LootTable.builder()
-                .pool(LootPool.builder()
-                    .rolls(UniformLootNumberProvider.create(0, 2))
-                    .with(ItemEntry.builder(Items.DIAMOND))));
-    }
-}
-```
-
-### Configuration
-
-```java
-import dk.mosberg.api.config.ConfigManager;
-
-public class ModConfig {
-    public static final ConfigManager CONFIG = new ConfigManager("yourmod");
-
-    public static int SPAWN_RATE = 10;
-    public static boolean ENABLE_FEATURE = true;
-    public static String CUSTOM_MESSAGE = "Hello!";
-
-    public static void load() {
-        SPAWN_RATE = CONFIG.getInt("spawn_rate", 10);
-        ENABLE_FEATURE = CONFIG.getBoolean("enable_feature", true);
-        CUSTOM_MESSAGE = CONFIG.getString("custom_message", "Hello!");
-
-        CONFIG.save();
-    }
-}
-```
-
-### Custom Events
-
-```java
-import dk.mosberg.api.event.MosbergEvents;
-
-public class ModEvents {
+public class ModCommands {
     public static void register() {
-        MosbergEvents.BLOCK_MINED.register((player, world, pos, state) -> {
-            if (state.isOf(Blocks.DIAMOND_ORE)) {
-                player.sendMessage(Text.literal("You mined diamonds!"), false);
-            }
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+            MosbergCommands.register(dispatcher, "yourcommand", 
+                ctx -> {
+                    ctx.getSource().sendFeedback(
+                        () -> Text.literal("Hello!"),
+                        false
+                    );
+                    return 1;
+                }
+            );
         });
     }
 }
+```
+
+#### Client Rendering
+
+```java
+import dk.mosberg.api.client.registry.MosbergRenderers;
+import dk.mosberg.api.client.util.RenderHelper;
+
+// Register entity renderer
+MosbergRenderers.registerEntityRenderer(
+    ModEntities.CUSTOM_MOB,
+    CustomMobRenderer::new,
+    ModModelLayers.CUSTOM_MOB,
+    CustomMobModel::getTexturedModelData
+);
+
+// Use render helper
+RenderHelper.drawRect(matrices, x, y, width, height, color);
+RenderHelper.drawString(matrices, text, x, y, textColor);
 ```
 
 ---
@@ -523,19 +466,20 @@ public class MyMod implements ModInitializer {
     @Override
     public void onInitialize() {
         LOGGER.info("Initializing MyMod!");
-
+        
         // Register all content
         ModBlocks.initialize();
         ModItems.initialize();
         ModEntities.initialize();
+        ModEnchantments.initialize();
         ModSounds.initialize();
-
+        
         // Register events
         ModEvents.register();
-
+        
         // Load config
         ModConfig.load();
-
+        
         LOGGER.info("MyMod initialized successfully!");
     }
 }
@@ -544,9 +488,6 @@ public class MyMod implements ModInitializer {
 package com.example.mymod.content;
 
 import dk.mosberg.api.registry.*;
-import net.minecraft.block.*;
-import net.minecraft.item.*;
-import net.minecraft.sound.SoundEvent;
 
 public class ModBlocks {
     public static final Block RUBY_BLOCK = MosbergBlocks.register(
@@ -554,98 +495,26 @@ public class ModBlocks {
         new Block(AbstractBlock.Settings.copy(Blocks.DIAMOND_BLOCK))
     );
 
-    public static final Block RUBY_ORE = MosbergBlocks.register(
-        "ruby_ore",
-        new OreBlock(Blocks.DEEPSLATE_DIAMOND_ORE,
-            AbstractBlock.Settings.copy(Blocks.DEEPSLATE_DIAMOND_ORE))
-    );
-
     public static void initialize() {
         // Called from main initializer
     }
 }
 
-public class ModItems {
-    public static final Item RUBY = MosbergItems.register(
-        "ruby",
-        new Item(new Item.Settings())
-    );
-
-    public static final Item RUBY_SWORD = MosbergItems.register(
-        "ruby_sword",
-        new SwordItem(ToolMaterials.DIAMOND,
-            new Item.Settings()
-                .maxDamage(1500)
-                .rarity(Rarity.RARE))
+public class ModEnchantments {
+    public static final Enchantment RUBY_SHARPNESS = MosbergEnchantments.register(
+        "ruby_sharpness",
+        Enchantment.create(
+            Text.translatable("enchantment.mymod.ruby_sharpness"),
+            Effects.ATTACK_DAMAGE,
+            2,
+            5,
+            Enchantment.constantCost(10),
+            Enchantment.constantCost(60)
+        )
     );
 
     public static void initialize() {
         // Called from main initializer
-    }
-}
-
-public class ModSounds {
-    public static final SoundEvent RUBY_BREAK = MosbergSounds.register("block.ruby.break");
-    public static final SoundEvent RUBY_STEP = MosbergSounds.register("block.ruby.step");
-    public static final SoundEvent RUBY_PLACE = MosbergSounds.register("block.ruby.place");
-
-    public static void initialize() {
-        // Called from main initializer
-    }
-}
-
-// Event handlers
-package com.example.mymod.event;
-
-import dk.mosberg.api.event.MosbergEvents;
-
-public class ModEvents {
-    public static void register() {
-        MosbergEvents.BLOCK_MINED.register((player, world, pos, state) -> {
-            if (state.isOf(ModBlocks.RUBY_ORE)) {
-                // Bonus drops for ruby ore
-                ItemStack drop = new ItemStack(ModItems.RUBY, 2);
-                ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), drop);
-            }
-        });
-    }
-}
-
-// Data generation
-package com.example.mymod.datagen;
-
-import dk.mosberg.api.data.provider.MosbergRecipeProvider;
-import net.minecraft.data.recipe.RecipeGenerator;
-
-public class ModRecipes extends MosbergRecipeProvider {
-    public ModRecipes(DataOutput output,
-                      CompletableFuture<RegistryWrapper.WrapperLookup> registries) {
-        super(output, registries);
-    }
-
-    @Override
-    protected RecipeGenerator getRecipeGenerator(
-            RegistryWrapper.WrapperLookup registries,
-            RecipeExporter exporter) {
-        return new RecipeGenerator(registries, exporter) {
-            @Override
-            public void generate() {
-                // Ruby sword recipe
-                createShaped(RecipeCategory.TOOLS, ModItems.RUBY_SWORD)
-                    .pattern(" R ")
-                    .pattern(" R ")
-                    .pattern(" S ")
-                    .input('R', ModItems.RUBY)
-                    .input('S', Items.STICK)
-                    .criterion(hasItem(ModItems.RUBY), conditionsFromItem(ModItems.RUBY))
-                    .offerTo(exporter);
-
-                // Smelting ruby ore
-                offerSmelting(exporter, List.of(ModBlocks.RUBY_ORE),
-                    RecipeCategory.MISC, ModItems.RUBY,
-                    0.8f, 200, "ruby");
-            }
-        };
     }
 }
 ```
@@ -671,12 +540,25 @@ mosbergapi/
     │   │
     │   ├── 📁 java/dk/mosberg/api/
     │   │   │
-    │   │   ├── 📄 MosbergApi.java                   # Main mod initializer
+    │   │   ├── 📄 MosbergApi.java       # Main mod initializer
+    │   │   │
+    │   │   ├── 📁 command/              # Command system
+    │   │   │   ├── 📁 commands/         # Pre-made commands
+    │   │   │   │   ├── 📄 BlockCommand.java
+    │   │   │   │   ├── 📄 ConfigCommand.java
+    │   │   │   │   ├── 📄 DebugCommand.java
+    │   │   │   │   ├── 📄 EntityCommand.java
+    │   │   │   │   ├── 📄 HelpCommand.java
+    │   │   │   │   ├── 📄 ItemCommand.java
+    │   │   │   │   ├── 📄 RegistryCommand.java
+    │   │   │   │   └── 📄 WorldCommand.java
+    │   │   │   ├── 📄 MosbergCommand.java
+    │   │   │   └── 📄 MosbergCommands.java
     │   │   │
     │   │   ├── 📁 config/
-    │   │   │   └── 📄 ConfigManager.java           # JSON config system
+    │   │   │   └── 📄 ConfigManager.java
     │   │   │
-    │   │   ├── 📁 data/                            # Data generation
+    │   │   ├── 📁 data/                 # Data generation
     │   │   │   ├── 📁 provider/
     │   │   │   │   ├── 📄 MosbergRecipeProvider.java
     │   │   │   │   └── 📄 MosbergLootTableProvider.java
@@ -684,76 +566,97 @@ mosbergapi/
     │   │   │   └── 📄 MosbergApiLootTableProvider.java
     │   │   │
     │   │   ├── 📁 doc/
-    │   │   │   └── 📄 DocumentationGenerator.java   # Auto-docs
+    │   │   │   └── 📄 DocumentationGenerator.java
     │   │   │
     │   │   ├── 📁 event/
-    │   │   │   └── 📄 MosbergEvents.java            # Custom events
+    │   │   │   └── 📄 MosbergEvents.java
     │   │   │
     │   │   ├── 📁 mixin/
-    │   │   │   └── 📄 MosbergMixin.java             # Server mixins
+    │   │   │   └── 📄 MosbergMixin.java
     │   │   │
-    │   │   ├── 📁 registry/                        # Registry helpers
-    │   │   │   ├── 📄 MosbergBlocks.java
-    │   │   │   ├── 📄 MosbergItems.java
-    │   │   │   ├── 📄 MosbergEntities.java
-    │   │   │   ├── 📄 MosbergItemGroups.java
-    │   │   │   ├── 📄 MosbergSounds.java
-    │   │   │   ├── 📄 MosbergParticles.java
-    │   │   │   ├── 📄 MosbergRecipes.java
+    │   │   ├── 📁 registry/             # Registry helpers (20+ classes)
     │   │   │   ├── 📄 MosbergAttributes.java
-    │   │   │   ├── 📄 MosbergGameEvents.java
-    │   │   │   ├── 📄 MosbergDataComponents.java
+    │   │   │   ├── 📄 MosbergBlockEntities.java
+    │   │   │   ├── 📄 MosbergBlocks.java
     │   │   │   ├── 📄 MosbergDamageTypes.java
-    │   │   │   └── 📄 MosbergRegistries.java        # Master registry
+    │   │   │   ├── 📄 MosbergDataComponents.java
+    │   │   │   ├── 📄 MosbergEnchantments.java
+    │   │   │   ├── 📄 MosbergEntities.java
+    │   │   │   ├── 📄 MosbergFluids.java
+    │   │   │   ├── 📄 MosbergGameEvents.java
+    │   │   │   ├── 📄 MosbergItemGroups.java
+    │   │   │   ├── 📄 MosbergItems.java
+    │   │   │   ├── 📄 MosbergParticles.java
+    │   │   │   ├── 📄 MosbergPotions.java
+    │   │   │   ├── 📄 MosbergRecipes.java
+    │   │   │   ├── 📄 MosbergRegistries.java
+    │   │   │   ├── 📄 MosbergScreenHandlerTypes.java
+    │   │   │   ├── 📄 MosbergSounds.java
+    │   │   │   ├── 📄 MosbergStatusEffects.java
+    │   │   │   ├── 📄 MosbergTags.java
+    │   │   │   ├── 📄 MosbergVillagers.java
+    │   │   │   └── 📄 MosbergWorldGen.java
     │   │   │
     │   │   ├── 📁 test/
-    │   │   │   └── 📄 TestHelper.java               # Testing utilities
+    │   │   │   └── 📄 TestHelper.java
     │   │   │
-    │   │   └── 📁 util/                             # Utility helpers (15+)
+    │   │   └── 📁 util/                 # Utility helpers (27 classes)
     │   │       ├── 📄 AttributeHelper.java
     │   │       ├── 📄 BlockHelper.java
     │   │       ├── 📄 CommandHelper.java
     │   │       ├── 📄 DamageTypeHelper.java
+    │   │       ├── 📄 DataComponentHelper.java
     │   │       ├── 📄 EnchantmentUtil.java
     │   │       ├── 📄 EntityHelper.java
+    │   │       ├── 📄 FluidHelper.java
+    │   │       ├── 📄 GameEventHelper.java
     │   │       ├── 📄 InventoryHelper.java
+    │   │       ├── 📄 ItemGroupHelper.java
     │   │       ├── 📄 ItemHelper.java
+    │   │       ├── 📄 MosbergEnchantmentHelper.java
     │   │       ├── 📄 MosbergHelper.java
-    │   │       ├── 📄 ModelHelper.java
     │   │       ├── 📄 NBTHelper.java
     │   │       ├── 📄 NetworkHelper.java
+    │   │       ├── 📄 ParticleHelper.java
+    │   │       ├── 📄 PotionHelper.java
     │   │       ├── 📄 RecipeHelper.java
     │   │       ├── 📄 SerializationHelper.java
+    │   │       ├── 📄 SoundHelper.java
+    │   │       ├── 📄 StatusEffectHelper.java
     │   │       ├── 📄 TagHelper.java
+    │   │       ├── 📄 VillagerHelper.java
     │   │       └── 📄 WorldHelper.java
     │   │
     │   └── 📁 resources/
-    │       ├── 📄 fabric.mod.json                   # Mod metadata
-    │       ├── 📄 mosbergapi.mixins.json            # Mixin config
-    │       ├── 📄 pack.mcmeta                       # Pack metadata
+    │       ├── 📄 fabric.mod.json
+    │       ├── 📄 mosbergapi.mixins.json
+    │       ├── 📄 pack.mcmeta
     │       │
-    │       ├── 📁 assets/mosbergapi/                # Client assets
-    │       │   ├── 📄 icon.png                      # Mod icon (64x64)
-    │       │   ├── 📁 atlases/                      # Texture atlases
-    │       │   ├── 📁 blockstates/                  # Block state JSONs
+    │       ├── 📁 assets/mosbergapi/
+    │       │   ├── 📁 atlases/
+    │       │   ├── 📁 block/
+    │       │   ├── 📁 blockstates/
+    │       │   ├── 📁 equipment/
+    │       │   ├── 📁 items/
     │       │   ├── 📁 lang/
     │       │   │   └── 📄 en_us.json
     │       │   ├── 📁 models/
     │       │   │   ├── 📁 block/
-    │       │   │   ├── 📁 item/
     │       │   │   ├── 📁 entity/
-    │       │   │   └── 📁 equipment/
+    │       │   │   ├── 📁 equipment/
+    │       │   │   └── 📁 item/
     │       │   ├── 📁 particles/
     │       │   ├── 📁 post_effect/
     │       │   ├── 📁 shaders/
     │       │   ├── 📁 sounds/
     │       │   ├── 📁 texts/
-    │       │   └── 📁 textures/
-    │       │       ├── 📁 block/
-    │       │       ├── 📁 item/
-    │       │       └── 📁 entity/
+    │       │   ├── 📁 textures/
+    │       │   │   ├── 📁 block/
+    │       │   │   ├── 📁 entity/
+    │       │   │   └── 📁 item/
+    │       │   └── 📄 icon.png
     │       │
-    │       └── 📁 data/mosbergapi/                  # Server data
+    │       └── 📁 data/mosbergapi/
     │           ├── 📁 advancement/
     │           ├── 📁 damage_type/
     │           ├── 📁 enchantment/
@@ -766,81 +669,45 @@ mosbergapi/
         │
         ├── 📁 java/dk/mosberg/api/client/
         │   │
-        │   ├── 📄 MosbergApiClient.java             # Client initializer
+        │   ├── 📄 MosbergApiClient.java
         │   │
-        │   ├── 📁 data/                             # Client data gen
+        │   ├── 📁 data/                 # Client data generation
         │   │   ├── 📁 provider/
         │   │   │   └── 📄 MosbergModelProvider.java
-        │   │   ├── 📄 MosbergApiModelProvider.java
-        │   │   └── 📄 MosbergApiDataGenerator.java
+        │   │   ├── 📄 MosbergApiDataGenerator.java
+        │   │   └── 📄 MosbergApiModelProvider.java
         │   │
         │   ├── 📁 mixin/client/
         │   │   └── 📄 MosbergClientMixin.java
         │   │
-        │   ├── 📁 registry/                         # Client registries
+        │   ├── 📁 registry/              # Client registries
         │   │   ├── 📄 MosbergModelLayers.java
+        │   │   ├── 📄 MosbergModels.java
         │   │   ├── 📄 MosbergRenderers.java
-        │   │   └── 📄 MosbergModels.java
+        │   │   ├── 📄 MosbergRenderStates.java
+        │   │   └── 📄 MosbergScreenHandlers.java
         │   │
-        │   ├── 📁 util/                             # Client utilities
-        │   │   ├── 📄 RenderHelper.java
-        │   │   └── 📄 ModelHelper.java
-        │   │
-        │   └── 📁 event/
-        │       └── 📄 MosbergClientEvents.java
+        │   └── 📁 util/                 # Client utilities (7 helpers)
+        │       ├── 📄 ModelHelper.java
+        │       ├── 📄 ModelLayersHelper.java
+        │       ├── 📄 RenderHelper.java
+        │       ├── 📄 RenderStatesHelper.java
+        │       ├── 📄 ScreenHandler Helper.java
+        │       ├── 📄 ScreenHelper.java
+        │       └── 📄 TextureHelper.java
         │
         └── 📁 resources/
             └── 📄 mosbergapi.client.mixins.json
 ```
 
-### Asset Organization
+### Summary Statistics
 
-#### Client Assets (`src/main/resources/assets/mosbergapi/`)
-
-```
-assets/mosbergapi/
-├── atlases/                 # Texture atlas definitions
-├── blockstates/             # Block state JSON files
-│   └── custom_block.json
-├── equipment/               # Armor/equipment models
-├── lang/                    # Localization files
-│   └── en_us.json           # English strings
-├── models/
-│   ├── block/               # Block models
-│   ├── item/                # Item models (JSON)
-│   ├── entity/              # Entity/mob models
-│   └── equipment/           # Armor models
-├── particles/               # Particle definitions
-├── post_effect/             # Post-processing shaders
-├── shaders/                 # GLSL shader files
-├── sounds/                  # Sound effects (.ogg)
-├── texts/                   # Text files (credits)
-└── textures/
-    ├── block/               # Block textures (PNG)
-    ├── entity/              # Entity textures (PNG)
-    └── item/                # Item textures (PNG)
-```
-
-#### Server Data (`src/main/resources/data/mosbergapi/`)
-
-```
-data/mosbergapi/
-├── advancement/             # Advancement definitions
-├── damage_type/             # Custom damage types (1.21+)
-├── enchantment/             # Enchantment definitions
-├── loot_table/              # Loot table definitions
-├── recipe/                  # Recipe definitions
-├── tags/                    # Tag definitions
-│   ├── blocks/
-│   ├── items/
-│   ├── fluids/
-│   └── entity_types/
-└── worldgen/                # World generation
-    ├── biome/
-    ├── feature/
-    ├── configured_feature/
-    └── placed_feature/
-```
+- **20+ Registry Classes** - Comprehensive content registration
+- **27 Utility Helpers** - Production-ready functionality
+- **8 Pre-made Commands** - Command framework with examples
+- **7 Client-Side Helpers** - Rendering and UI utilities
+- **60+ Registry Methods** - Master registry support
+- **Modular Design** - Easy to use, easy to extend
 
 ---
 
@@ -894,11 +761,11 @@ cd mosbergapi
 
 After building, find outputs in `build/libs/`:
 
-| JAR                            | Purpose                      |
-| ------------------------------ | ---------------------------- |
-| `mosbergapi-1.0.0.jar`         | Production mod JAR           |
+| JAR | Purpose |
+|-----|---------|
+| `mosbergapi-1.0.0.jar` | Production mod JAR |
 | `mosbergapi-1.0.0-sources.jar` | Source code (for developers) |
-| `mosbergapi-1.0.0-javadoc.jar` | API documentation            |
+| `mosbergapi-1.0.0-javadoc.jar` | API documentation |
 
 ---
 
@@ -907,20 +774,17 @@ After building, find outputs in `build/libs/`:
 ### Code Style Guidelines
 
 1. **Formatting**
-
    - 4 spaces per indent (no tabs)
    - 120 character line limit
    - Format with `spotlessApply` before commit
 
 2. **Naming**
-
    - Classes: `PascalCase` (e.g., `EntityHelper`)
    - Methods: `camelCase` (e.g., `teleportEntity`)
    - Constants: `UPPER_SNAKE_CASE` (e.g., `MOD_ID`)
    - Private fields: `camelCase` with `private` modifier
 
 3. **Documentation**
-
    - Public API methods require JavaDoc
    - Use `@param`, `@return`, `@throws` tags
    - Include `@since` version tag
@@ -936,26 +800,22 @@ After building, find outputs in `build/libs/`:
 ### Contribution Steps
 
 1. **Fork & Clone**
-
    ```bash
    git clone https://github.com/YOUR_USERNAME/mosbergapi.git
    cd mosbergapi
    ```
 
 2. **Create Feature Branch**
-
    ```bash
    git checkout -b feature/amazing-feature
    ```
 
 3. **Make Changes**
-
    - Follow code style guidelines
    - Add tests if applicable
    - Update documentation
 
 4. **Format & Test**
-
    ```bash
    ./gradlew spotlessApply    # Format code
    ./gradlew test             # Run tests
@@ -963,7 +823,6 @@ After building, find outputs in `build/libs/`:
    ```
 
 5. **Commit with Clear Message**
-
    ```bash
    git commit -m "Add amazing feature
 
@@ -978,56 +837,6 @@ After building, find outputs in `build/libs/`:
    git push origin feature/amazing-feature
    ```
 
-### Issue Templates
-
-#### Bug Report
-
-````markdown
-**Describe the Bug**
-Clear description of what happened.
-
-**Minecraft Version**: 1.21.10
-**MosbergAPI Version**: 1.0.0
-**Fabric Loader Version**: 0.18.3
-**Fabric API Version**: 0.138.4+1.21.10
-
-**Steps to Reproduce**
-
-1. ...
-2. ...
-3. ...
-
-**Expected Behavior**
-What should happen instead.
-
-**Actual Behavior**
-What actually happened.
-
-**Error Log**
-
-```logs
-Paste relevant logs here
-```
-````
-
-````
-
-#### Feature Request
-
-```markdown
-**Describe the Feature**
-Clear description of the requested feature.
-
-**Use Cases**
-Why would this feature be useful?
-
-**Proposed Implementation**
-How should this feature work?
-
-**Alternative Solutions**
-Other ways to solve this problem?
-````
-
 ---
 
 ## 🐛 Support & Troubleshooting
@@ -1037,7 +846,6 @@ Other ways to solve this problem?
 #### Issue: "Cannot find symbol: class MosbergBlocks"
 
 **Solution**: Ensure MosbergAPI is added to `build.gradle`:
-
 ```gradle
 dependencies {
     modImplementation "dk.mosberg:mosbergapi:1.0.0"
@@ -1047,28 +855,24 @@ dependencies {
 #### Issue: "Mixin not applied"
 
 **Solution**: Verify `fabric.mod.json`:
-
 ```json
 {
   "mixins": ["mosbergapi.mixins.json"]
 }
 ```
 
-#### Issue: "Config not loading"
+#### Issue: "Command not registered"
 
-**Solution**: Call `ConfigManager.load()` during `ModInitializer.onInitialize()`:
-
+**Solution**: Register commands in `ModInitializer.onInitialize()`:
 ```java
-@Override
-public void onInitialize() {
-    ModConfig.load();  // Before other registration
-}
+CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+    MosbergCommands.registerAllCommands(dispatcher);
+});
 ```
 
 #### Issue: "Data generation not running"
 
 **Solution**: Ensure your `DataGeneratorEntrypoint` is registered in `fabric.mod.json`:
-
 ```json
 {
   "entrypoints": {
@@ -1084,40 +888,23 @@ public void onInitialize() {
 - **Wiki**: [GitHub Wiki](https://github.com/Mosberg/mosbergapi/wiki)
 - **Discord**: Join the Fabric community (link in repo)
 
-### Debug Logging
-
-Enable debug logs by setting log level in your IDE run configuration:
-
-```bash
-# VM Options
--Dlog4j.configurationFile=log4j-debug.xml
-```
-
-Or in `fabric.mod.json`:
-
-```json
-{
-  "custom": {
-    "modsDir": "mods"
-  }
-}
-```
-
 ---
 
 ## 📊 Project Status
 
-| Component                | Status     | Details                         |
-| ------------------------ | ---------- | ------------------------------- |
-| **Core Registry**        | ✅ Stable  | All 60+ registries working      |
-| **Utility Helpers**      | ✅ Stable  | 15+ helpers production-ready    |
-| **Data Generation**      | ✅ Stable  | Recipes, loot, models           |
-| **Event System**         | ✅ Stable  | BlockMined, PlayerJoin events   |
-| **Config Manager**       | ✅ Stable  | JSON-based configuration        |
-| **Client Rendering**     | ✅ Stable  | Entity and block rendering      |
-| **Testing Framework**    | 🚧 Beta    | Unit testing utilities          |
-| **GUI Utilities**        | 📋 Planned | Button, label, text box widgets |
-| **Networking Framework** | 📋 Planned | Advanced packet handling        |
+| Component | Status | Details |
+|-----------|--------|---------|
+| **Core Registry (20+)** | ✅ Stable | All registries working perfectly |
+| **Utility Helpers (27)** | ✅ Stable | Production-ready functionality |
+| **Command System (8)** | ✅ Stable | Pre-made commands with framework |
+| **Data Generation** | ✅ Stable | Recipes, loot, models |
+| **Event System** | ✅ Stable | BlockMined, PlayerJoin events |
+| **Client Rendering** | ✅ Stable | Entity and block rendering |
+| **Config Manager** | ✅ Stable | JSON-based configuration |
+| **Client Utilities (7)** | ✅ Stable | Render, screen, model helpers |
+| **Testing Framework** | 🚧 Beta | Unit testing utilities |
+| **GUI Utilities** | 📋 Planned | Advanced widget system |
+| **Networking Framework** | 📋 Planned | Advanced packet handling |
 
 ---
 
@@ -1127,10 +914,10 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 
 You are free to:
 
-✅ Use MosbergAPI in commercial projects
-✅ Modify and distribute the source code
-✅ Include in mods without attribution (but appreciated)
-✅ Use for personal or educational purposes
+✅ Use MosbergAPI in commercial projects  
+✅ Modify and distribute the source code  
+✅ Include in mods without attribution (but appreciated)  
+✅ Use for personal or educational purposes  
 
 The only requirement is to include the original license and copyright notice.
 
@@ -1170,12 +957,12 @@ The only requirement is to include the original license and copyright notice.
 
 ## 📝 Version History
 
-| Version   | Minecraft | Status      | Notes                  |
-| --------- | --------- | ----------- | ---------------------- |
-| **1.0.0** | 1.21.10   | ✅ Released | Initial stable release |
-| 0.5.0     | 1.21.1    | ✅ Released | Beta test release      |
+| Version | Minecraft | Status | Notes |
+|---------|-----------|--------|-------|
+| **1.0.0** | 1.21.10 | ✅ Released | Initial stable release with 20+ registries, 27 helpers, command system |
+| 0.5.0 | 1.21.1 | ✅ Released | Beta test release |
 
-_See [CHANGELOG.md](CHANGELOG.md) for detailed version history._
+*See [CHANGELOG.md](CHANGELOG.md) for detailed version history.*
 
 ---
 
@@ -1226,24 +1013,21 @@ import dk.mosberg.api.registry.*;
 // Utility imports
 import dk.mosberg.api.util.*;
 
+// Command imports
+import dk.mosberg.api.command.*;
+
 // Data generation imports
 import dk.mosberg.api.data.provider.*;
 
 // Event imports
 import dk.mosberg.api.event.*;
 
+// Client imports
+import dk.mosberg.api.client.registry.*;
+import dk.mosberg.api.client.util.*;
+
 // Config imports
 import dk.mosberg.api.config.*;
-```
-
-### Annotation Reference
-
-```java
-@Nullable           // This value can be null
-@NotNull            // This value must not be null
-@Override           // Method overrides parent
-@FunctionalInterface // Interface has single method
-@Deprecated(since="1.0.0") // No longer recommended
 ```
 
 ---
@@ -1258,6 +1042,6 @@ import dk.mosberg.api.config.*;
 
 ---
 
-**MosbergAPI** - Accelerating Minecraft mod development, one helper at a time.
+**MosbergAPI** - *Accelerating Minecraft mod development, one helper at a time.*
 
-_Made with ❤️ by Mosberg for the Minecraft modding community_
+*Made with ❤️ for the Minecraft modding community*
