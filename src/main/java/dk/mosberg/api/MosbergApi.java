@@ -7,6 +7,7 @@ import dk.mosberg.api.registry.MosbergBlockEntities;
 import dk.mosberg.api.registry.MosbergBlocks;
 import dk.mosberg.api.registry.MosbergCommands;
 import dk.mosberg.api.registry.MosbergDamageTypes;
+import dk.mosberg.api.registry.MosbergDataComponents;
 import dk.mosberg.api.registry.MosbergEnchantments;
 import dk.mosberg.api.registry.MosbergEntities;
 import dk.mosberg.api.registry.MosbergFluids;
@@ -16,6 +17,7 @@ import dk.mosberg.api.registry.MosbergItems;
 import dk.mosberg.api.registry.MosbergParticles;
 import dk.mosberg.api.registry.MosbergPotions;
 import dk.mosberg.api.registry.MosbergRecipes;
+import dk.mosberg.api.registry.MosbergRegistries;
 import dk.mosberg.api.registry.MosbergScreenHandlerTypes;
 import dk.mosberg.api.registry.MosbergSounds;
 import dk.mosberg.api.registry.MosbergStatusEffects;
@@ -32,35 +34,50 @@ public class MosbergApi implements ModInitializer {
 	public void onInitialize() {
 		LOGGER.info("Initializing MosbergAPI");
 
-		// Core registries (order matters for dependencies)
-		MosbergBlocks.initialize();
-		MosbergItems.initialize();
-		MosbergFluids.initialize();
-		MosbergEntities.initialize();
-		MosbergBlockEntities.initialize();
+		// Initialize registries in dependency order
+		// Core registries first
+		MosbergDataComponents.initialize(); // Data components (needed for items)
+		MosbergSounds.initialize(); // Sound events
+		MosbergParticles.initialize(); // Particle types
+		MosbergGameEvents.initialize(); // Game events
 
-		// Effect & gameplay registries
-		MosbergStatusEffects.initialize();
-		MosbergPotions.initialize();
-		MosbergAttributes.initialize();
-		MosbergGameEvents.initialize();
+		// Block and fluid registries
+		MosbergFluids.initialize(); // Fluids (needed for fluid blocks)
+		MosbergBlocks.initialize(); // Blocks
+		MosbergBlockEntities.initialize(); // Block entities (needs blocks)
 
-		// Content registries
-		MosbergParticles.initialize();
-		MosbergSounds.initialize();
-		MosbergRecipes.initialize();
-		MosbergScreenHandlerTypes.initialize();
-		MosbergItemGroups.initialize();
+		// Item registries
+		MosbergItems.initialize(); // Items
+		MosbergItemGroups.initialize(); // Creative tabs (needs items)
 
-		// Villager & world gen (data-driven)
-		MosbergVillagers.initialize();
-		MosbergWorldGen.initialize();
+		// Effect registries
+		MosbergStatusEffects.initialize(); // Status effects
+		MosbergPotions.initialize(); // Potions (needs status effects)
+		MosbergEnchantments.initialize(); // Enchantments
 
-		// Data-driven registries (references only)
-		MosbergEnchantments.initialize();
-		MosbergDamageTypes.initialize();
-		MosbergTags.initialize();
-		MosbergCommands.initialize();
+		// Entity registries
+		MosbergAttributes.initialize(); // Entity attributes
+		MosbergEntities.initialize(); // Entity types (needs attributes)
+		MosbergDamageTypes.initialize(); // Damage types
+
+		// Villager registries
+		MosbergVillagers.initialize(); // Villagers (needs blocks for POI)
+
+		// Recipe and screen registries
+		MosbergRecipes.initialize(); // Recipe serializers
+		MosbergScreenHandlerTypes.initialize(); // Screen handlers
+
+		// World generation
+		MosbergWorldGen.initialize(); // World gen features
+
+		// Tag registration
+		MosbergTags.initialize(); // Tags
+
+		// Command registration
+		MosbergCommands.initialize(); // Commands
+
+		// Central registry (general purpose helper)
+		MosbergRegistries.initialize();
 
 		LOGGER.info("MosbergAPI initialized successfully");
 	}

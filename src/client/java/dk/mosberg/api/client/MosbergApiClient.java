@@ -16,15 +16,12 @@ public class MosbergApiClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		LOGGER.info("Initializing MosbergAPI Client");
-		// Initialize all client-side registries
-		// Order can be important due to dependencies
-		// Initialize model layers first
-		// then models, render states, and renderers
-		MosbergModelLayers.initialize();
-		MosbergModels.initialize();
-		MosbergRenderStates.initialize();
-		MosbergRenderers.initialize();
-		MosbergScreenHandlers.initialize();
+		// Initialize client registries
+		MosbergModelLayers.initialize(); // Model layers (needed first)
+		MosbergModels.initialize(); // Entity models
+		MosbergRenderStates.initialize(); // Render states (1.21.2+)
+		MosbergRenderers.initialize(); // Entity/block entity renderers
+		MosbergScreenHandlers.initialize(); // Screen handlers (GUIs)
 
 		LOGGER.info("MosbergAPI Client initialized successfully");
 	}
