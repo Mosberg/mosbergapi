@@ -15,7 +15,7 @@ import net.minecraft.util.Identifier;
  * using the provided helper methods.
  *
  * @example
- * 
+ *
  *          <pre>{@code
  * public static final BlockEntityType<CustomBlockEntity> CUSTOM_BE = register("custom_be",
  *     FabricBlockEntityTypeBuilder.create(CustomBlockEntity::new, MosbergBlocks.CUSTOM_BLOCK)
@@ -44,7 +44,7 @@ public class MosbergBlockEntities {
      * @return The registered BlockEntityType
      *
      * @example
-     * 
+     *
      *          <pre>{@code
      * BlockEntityType<FurnaceBlockEntity> type = MosbergBlockEntities.register("custom_furnace",
      *     FabricBlockEntityTypeBuilder.create(FurnaceBlockEntity::new, MosbergBlocks.FURNACE)
@@ -70,7 +70,7 @@ public class MosbergBlockEntities {
      * @return The registered BlockEntityType
      *
      * @example
-     * 
+     *
      *          <pre>{@code
      * BlockEntityType<ChestBlockEntity> chest = MosbergBlockEntities.register("custom_chest",
      *     ChestBlockEntity::new,
@@ -94,7 +94,7 @@ public class MosbergBlockEntities {
      * @return The registered BlockEntityType
      *
      * @example
-     * 
+     *
      *          <pre>{@code
      * BlockEntityType<BeaconBlockEntity> beacon = MosbergBlockEntities.registerSingle(
      *     "custom_beacon",
