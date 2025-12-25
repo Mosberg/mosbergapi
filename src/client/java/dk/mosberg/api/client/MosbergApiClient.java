@@ -6,6 +6,7 @@ import dk.mosberg.api.client.registry.MosbergModelLayers;
 import dk.mosberg.api.client.registry.MosbergModels;
 import dk.mosberg.api.client.registry.MosbergRenderStates;
 import dk.mosberg.api.client.registry.MosbergRenderers;
+import dk.mosberg.api.client.registry.MosbergScreenHandlers;
 import net.fabricmc.api.ClientModInitializer;
 
 public class MosbergApiClient implements ClientModInitializer {
@@ -23,6 +24,7 @@ public class MosbergApiClient implements ClientModInitializer {
 		MosbergModels.initialize();
 		MosbergRenderStates.initialize();
 		MosbergRenderers.initialize();
+		MosbergScreenHandlers.initialize();
 
 		LOGGER.info("MosbergAPI Client initialized successfully");
 	}

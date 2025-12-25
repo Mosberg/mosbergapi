@@ -5,10 +5,16 @@ assertj
 blit
 blockstates
 chestplate
+Completionist
+cooldown
+Cooldown
 datagen
+debuff
+Debuff
 DEEPSLATE
 dstrgb
 fabricmc
+Flowable
 getenv
 gradlew
 gson
@@ -26,6 +32,8 @@ Mosberg
 mosbergapi
 MosbergApi
 MOSBERGNBT
+multitool
+Multitool
 mymod
 outtarget
 println
@@ -33,6 +41,8 @@ resourcepack
 shedaniel
 Shedaniel
 sobel
+soulbound
+Soulbound
 srcrgb
 Terraformers
 terraformersmc
