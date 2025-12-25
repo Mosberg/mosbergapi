@@ -207,4 +207,179 @@ public class InventoryHelper {
     public boolean removeFromPlayer(PlayerEntity player, Item item, int amount) {
         return removeItem(player.getInventory(), item, amount);
     }
+
+    /**
+     * Transfers items between two inventories up to the specified maximum amount.
+     * <p>
+     * Attempts to move items from the source inventory to the destination inventory, respecting
+     * stack sizes and attempting to merge with existing stacks when possible.
+     *
+     * @param source The inventory to transfer items from
+     * @param destination The inventory to transfer items to
+     * @param maxAmount The maximum number of items to transfer
+     * @return The total number of items successfully transferred
+     *
+     * @throws IllegalArgumentException if source or destination is null
+     * @throws IllegalArgumentException if maxAmount is negative
+     *
+     * @example
+     *
+     *          <pre>{@code
+     * // Transfer up to 64 items from chest to player inventory
+     * int transferred = inventoryHelper.transferItems(chestInventory, playerInventory, 64);
+     *
+     * // Transfer all items (large number)
+     * int transferred = inventoryHelper.transferItems(source, dest, Integer.MAX_VALUE);
+     * }</pre>
+     *
+     * @since 1.0.0
+     * @author Mosberg
+     */
+    public int transferItems(Inventory source, Inventory destination, int maxAmount) {
+        if (source == null) {
+            throw new IllegalArgumentException("Source inventory cannot be null");
+        }
+        if (destination == null) {
+            throw new IllegalArgumentException("Destination inventory cannot be null");
+        }
+        if (maxAmount < 0) {
+            throw new IllegalArgumentException("Max amount cannot be negative: " + maxAmount);
+        }
+
+        int transferred = 0;
+
+        // Iterate through all slots in the source inventory
+        for (int i = 0; i < source.size() && transferred < maxAmount; i++) {
+            ItemStack sourceStack = source.getStack(i);
+
+            // Skip empty slots
+            if (sourceStack.isEmpty()) {
+                continue;
+            }
+
+            // Calculate how many items we can still transfer
+            int remainingToTransfer = maxAmount - transferred;
+
+            // Calculate how many to transfer from this slot (limited by stack size and remaining
+            // capacity)
+            int toTransfer = Math.min(sourceStack.getCount(), remainingToTransfer);
+
+            // Create a copy of the stack to transfer
+            ItemStack transferStack = sourceStack.copyWithCount(toTransfer);
+
+            // Try to insert into destination
+            ItemStack remaining = addItemToInventory(destination, transferStack);
+
+            // Calculate how many were actually transferred
+            int actuallyTransferred = toTransfer - remaining.getCount();
+
+            // Remove the transferred items from the source
+            sourceStack.decrement(actuallyTransferred);
+
+            // Update the total transferred count
+            transferred += actuallyTransferred;
+
+            // If we couldn't transfer any items to the destination, it's probably full
+            if (actuallyTransferred == 0) {
+                break;
+            }
+        }
+
+        return transferred;
+    }
+
+    /**
+     * Adds an item stack to an inventory, merging with existing stacks when possible.
+     * <p>
+     * This method attempts to:
+     * <ol>
+     * <li>Merge with existing stacks of the same item type</li>
+     * <li>Place in empty slots if merging isn't possible</li>
+     * <li>Return any remaining items that couldn't be inserted</li>
+     * </ol>
+     *
+     * @param destination The inventory to add items to
+     * @param stack The item stack to add (will not be modified)
+     * @return A new ItemStack containing any items that couldn't be inserted (empty if all were
+     *         inserted)
+     *
+     * @throws IllegalArgumentException if destination or stack is null
+     *
+     * @example
+     *
+     *          <pre>{@code
+     * ItemStack diamonds = new ItemStack(Items.DIAMOND, 100);
+     * ItemStack remaining = addItemToInventory(inventory, diamonds);
+     *
+     * if (remaining.isEmpty()) {
+     *     System.out.println("All items inserted successfully");
+     *          } else {
+     *          System.out.println(remaining.getCount() + " items couldn't fit");
+     *          }
+     * }</pre>
+     *
+     * @since 1.0.0
+     * @author Mosberg
+     */
+    public static ItemStack addItemToInventory(Inventory destination, ItemStack stack) {
+
+        if (destination == null) {
+            throw new IllegalArgumentException("Destination inventory cannot be null");
+        }
+        if (stack == null) {
+            throw new IllegalArgumentException("ItemStack cannot be null");
+        }
+
+        // Return early if the stack is empty
+        if (stack.isEmpty()) {
+            return ItemStack.EMPTY;
+        }
+
+        // Create a working copy so we don't modify the original
+        ItemStack remaining = stack.copy();
+
+        // Phase 1: Try to merge with existing stacks
+        for (int i = 0; i < destination.size() && !remaining.isEmpty(); i++) {
+            ItemStack slotStack = destination.getStack(i);
+
+            // Skip empty slots (we'll handle those in phase 2)
+            if (slotStack.isEmpty()) {
+                continue;
+            }
+
+            // Check if stacks can be merged (same item and components)
+            if (ItemStack.areItemsAndComponentsEqual(slotStack, remaining)) {
+                // Calculate how many items we can add to this stack
+                int maxCount = Math.min(destination.getMaxCountPerStack(), slotStack.getMaxCount());
+                int availableSpace = maxCount - slotStack.getCount();
+
+                if (availableSpace > 0) {
+                    int toTransfer = Math.min(remaining.getCount(), availableSpace);
+                    slotStack.increment(toTransfer);
+                    remaining.decrement(toTransfer);
+                }
+            }
+        }
+
+        // Phase 2: Try to place remaining items in empty slots
+        for (int i = 0; i < destination.size() && !remaining.isEmpty(); i++) {
+            ItemStack slotStack = destination.getStack(i);
+
+            // Only use empty slots
+            if (!slotStack.isEmpty()) {
+                continue;
+            }
+
+            // Calculate how many items we can place in this empty slot
+            int maxCount = Math.min(destination.getMaxCountPerStack(), remaining.getMaxCount());
+            int toPlace = Math.min(remaining.getCount(), maxCount);
+
+            // Place the items
+            destination.setStack(i, remaining.copyWithCount(toPlace));
+            remaining.decrement(toPlace);
+        }
+
+        // Return any items that couldn't be inserted
+        return remaining.isEmpty() ? ItemStack.EMPTY : remaining;
+    }
 }

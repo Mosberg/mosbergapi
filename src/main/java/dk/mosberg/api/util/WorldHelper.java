@@ -42,13 +42,6 @@ public class WorldHelper {
     }
 
     /**
-     * Gets the time of day (0-24000)
-     */
-    public long getTimeOfDay(World world) {
-        return world.getTimeOfDay();
-    }
-
-    /**
      * Sets the time of day
      */
     public void setTimeOfDay(ServerWorld world, long time) {
@@ -268,9 +261,132 @@ public class WorldHelper {
     }
 
     /**
+     * Gets the size (diameter) of the world border in blocks.
+     * <p>
+     * The world border defines the playable area of the world. This method returns the current
+     * diameter of the world border, which represents the distance from one edge to the opposite
+     * edge passing through the center.
+     *
+     * @param world The world to get the border size from
+     * @return The diameter of the world border in blocks
+     *
+     * @throws IllegalArgumentException if world is null
+     *
+     * @example
+     *
+     *          <pre>{@code
+     * // Get world border size
+     * int borderSize = WorldHelper.size(world);
+     * // Returns: 59999968 (default vanilla world border)
+     *
+     * // Check if a position is within the border
+     * int size = WorldHelper.size(world);
+     * int radius = size / 2;
+     * boolean withinBorder = Math.abs(pos.getX()) < radius && Math.abs(pos.getZ()) < radius;
+     * }</pre>
+     *
+     * @see #getWorldBorderCenter(World)
+     * @see #getWorldBorderDamagePerBlock(World)
+     * @see #isWithinWorldBorder(World, BlockPos)
+     *
+     * @since 1.0.0
+     * @author Mosberg
+     */
+    public int size(World world) {
+        if (world == null) {
+            throw new IllegalArgumentException("World cannot be null");
+        }
+
+        return (int) world.getWorldBorder().getSize();
+    }
+
+    /**
      * Gets the maximum build height of the world
      */
     public int getMaxBuildHeight(World world) {
         return world.getTopY(null, 0, 0);
     }
+
+    /**
+     * Gets the current time of day as a formatted string with time period.
+     * <p>
+     * Converts Minecraft's tick-based time system into a human-readable format including the time
+     * period (Dawn, Morning, Afternoon, Dusk, Night, Midnight).
+     *
+     * @param world The world to get the time from
+     * @return A formatted time string with period (e.g., "Day 3, 14:30 (Afternoon)")
+     *
+     * @throws IllegalArgumentException if world is null
+     *
+     * @example
+     *
+     *          <pre>{@code
+     * String timeStr = WorldHelper.getTimeOfDay(world);
+     * // Returns: "Day 5, 12:00 (Noon)" or "Day 5, 18:30 (Dusk)"
+     * }</pre>
+     *
+     * @since 1.0.0
+     * @author Mosberg
+     */
+    public static String getTimeOfDay(World world) {
+        if (world == null) {
+            throw new IllegalArgumentException("World cannot be null");
+        }
+
+        long totalTime = world.getTime();
+        long timeOfDay = world.getTimeOfDay() % 24000;
+        long dayNumber = totalTime / 24000L;
+
+        // Calculate hours and minutes (6 AM = 0 ticks)
+        long minecraftHour = (timeOfDay / 1000L + 6) % 24;
+        long minecraftMinute = (timeOfDay % 1000L) * 60 / 1000L;
+
+        // Determine time period
+        String period = getTimePeriod(timeOfDay);
+
+        return String.format("Day %d, %02d:%02d (%s)", dayNumber, minecraftHour, minecraftMinute,
+                period);
+    }
+
+    /**
+     * Determines the time period based on Minecraft ticks.
+     * <p>
+     * Time periods in Minecraft:
+     * <ul>
+     * <li>Dawn: 23000-1000 (5:00 AM - 7:00 AM)</li>
+     * <li>Morning: 1000-6000 (7:00 AM - 12:00 PM)</li>
+     * <li>Noon: ~6000 (12:00 PM)</li>
+     * <li>Afternoon: 6000-12000 (12:00 PM - 6:00 PM)</li>
+     * <li>Dusk: 12000-13000 (6:00 PM - 7:00 PM)</li>
+     * <li>Night: 13000-18000 (7:00 PM - 12:00 AM)</li>
+     * <li>Midnight: ~18000 (12:00 AM)</li>
+     * <li>Late Night: 18000-23000 (12:00 AM - 5:00 AM)</li>
+     * </ul>
+     *
+     * @param ticks The time of day in ticks (0-24000)
+     * @return The time period name
+     *
+     * @since 1.0.0
+     * @author Mosberg
+     */
+    private static String getTimePeriod(long ticks) {
+        if (ticks >= 23000 || ticks < 1000) {
+            return "Dawn";
+        } else if (ticks >= 1000 && ticks < 5500) {
+            return "Morning";
+        } else if (ticks >= 5500 && ticks < 6500) {
+            return "Noon";
+        } else if (ticks >= 6500 && ticks < 12000) {
+            return "Afternoon";
+        } else if (ticks >= 12000 && ticks < 13000) {
+            return "Dusk";
+        } else if (ticks >= 13000 && ticks < 17500) {
+            return "Night";
+        } else if (ticks >= 17500 && ticks < 18500) {
+            return "Midnight";
+        } else {
+            return "Late Night";
+        }
+    }
+
 }

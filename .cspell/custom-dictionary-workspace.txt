@@ -15,6 +15,7 @@ datagen
 debuff
 Debuff
 DEEPSLATE
+despawn
 dstrgb
 fabricmc
 Flowable
