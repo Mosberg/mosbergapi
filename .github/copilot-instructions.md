@@ -6,6 +6,14 @@ MosbergAPI is a Fabric API library for Minecraft 1.21.10+ mod development. This 
 
 ---
 
+# MosbergAPI Copilot Instructions
+
+## Overview
+
+MosbergAPI is a Fabric API library for Minecraft 1.21.10+ mod development. This guide provides clear, actionable steps for using and contributing to MosbergAPI.
+
+---
+
 ## Quick Links
 
 - [Getting Started](https://github.com/Mosberg/mosbergapi/wiki/Getting-Started)

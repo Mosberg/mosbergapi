@@ -16,12 +16,15 @@ debuff
 Debuff
 DEEPSLATE
 despawn
+Dlog
 dstrgb
+fabricloader
 fabricmc
 Flowable
 gatherable
 Gatherable
 getenv
+GLSL
 gradlew
 gson
 Heightmap
@@ -64,3 +67,4 @@ Unregisters
 vorpal
 Xdoclint
 yourmod
+yourname
