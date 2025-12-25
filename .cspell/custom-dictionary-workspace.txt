@@ -15,6 +15,8 @@ DEEPSLATE
 dstrgb
 fabricmc
 Flowable
+gatherable
+Gatherable
 getenv
 gradlew
 gson
@@ -46,5 +48,6 @@ Soulbound
 srcrgb
 Terraformers
 terraformersmc
+vorpal
 Xdoclint
 yourmod
