@@ -2,9 +2,11 @@
 
 ## Overview
 
-MosbergAPI is a Fabric API library for Minecraft 1.21.10+ mod development. This guide provides concise, actionable instructions for using and contributing to MosbergAPI.
+MosbergAPI is a Fabric API library for Minecraft 1.21.10+ mod development. This guide provides clear, actionable steps for using and contributing to MosbergAPI.
 
-### Quick Links
+---
+
+## Quick Links
 
 - [Getting Started](https://github.com/Mosberg/mosbergapi/wiki/Getting-Started)
 - [Registry System](https://github.com/Mosberg/mosbergapi/wiki/Registry-System)
@@ -19,25 +21,22 @@ MosbergAPI is a Fabric API library for Minecraft 1.21.10+ mod development. This 
 
 ### For Mod Developers
 
-Add to `build.gradle`:
-
-```gradle
-repositories {
-    maven { name = "Mosberg"; url = "https://maven.moddingx.org" }
-}
-dependencies {
-    modImplementation "dk.mosberg:mosbergapi:1.0.0"
-    include "dk.mosberg:mosbergapi:1.0.0" // Optional: bundle with your mod
-}
-```
-
-Update `fabric.mod.json`:
-
-```json
-{
-  "depends": { "mosbergapi": ">=1.0.0" }
-}
-```
+1. Add to your `build.gradle`:
+   ```gradle
+   repositories {
+       maven { name = "Mosberg"; url = "https://maven.moddingx.org" }
+   }
+   dependencies {
+       modImplementation "dk.mosberg:mosbergapi:1.0.0"
+       include "dk.mosberg:mosbergapi:1.0.0" // Optional: bundle with your mod
+   }
+   ```
+2. Add to `fabric.mod.json`:
+   ```json
+   {
+     "depends": { "mosbergapi": ">=1.0.0" }
+   }
+   ```
 
 ### For Players
 
@@ -76,7 +75,7 @@ public class MyMod implements ModInitializer {
 
 ## Registry System
 
-Key classes (all static, auto-registering):
+All registry classes are static and auto-registering:
 
 - `MosbergBlocks` — Blocks (auto BlockItem)
 - `MosbergItems` — Items
@@ -86,7 +85,7 @@ Key classes (all static, auto-registering):
 - `MosbergItemGroups` — Creative tabs
 - `MosbergRegistries` — Low-level registry access
 
-Example:
+**Example:**
 
 ```java
 public static final Block CUSTOM_BLOCK = MosbergBlocks.register(
@@ -106,17 +105,20 @@ MosbergHelper.ENTITY.teleport(entity, destination);
 MosbergHelper.ITEM.createStack(Items.DIAMOND, 64);
 ```
 
-See [README.md](https://raw.githubusercontent.com/Mosberg/mosbergapi/main/README.md) for the full helper class/method list.
+See the [README.md](https://raw.githubusercontent.com/Mosberg/mosbergapi/main/README.md) for the full helper class/method list.
 
 ---
 
 ## Data Generation
 
-Extend `MosbergRecipeProvider`, `MosbergLootTableProvider`, or `MosbergModelProvider` for recipes, loot tables, and models. Register providers in your data generator entrypoint. Run with:
+To generate recipes, loot tables, or models:
 
-```
-./gradlew runDatagen
-```
+1. Extend `MosbergRecipeProvider`, `MosbergLootTableProvider`, or `MosbergModelProvider`.
+2. Register your providers in the data generator entrypoint.
+3. Run:
+   ```
+   ./gradlew runDatagen
+   ```
 
 ---
 
@@ -130,26 +132,26 @@ Extend `MosbergRecipeProvider`, `MosbergLootTableProvider`, or `MosbergModelProv
 
 ## FAQ
 
-**Is MosbergAPI required for players?**
-Only if using mods that depend on it. It's a library mod.
+**Q: Is MosbergAPI required for players?**
+A: Only if using mods that depend on it. It's a library mod.
 
-**Does MosbergAPI add content?**
-No, it provides APIs only.
+**Q: Does MosbergAPI add content?**
+A: No, it provides APIs only.
 
-**How do I bundle MosbergAPI with my mod?**
-Use `include` in your `build.gradle` dependencies.
+**Q: How do I bundle MosbergAPI with my mod?**
+A: Use `include` in your `build.gradle` dependencies.
 
-**Do I need to call `initialize()`?**
-No, registration is automatic on static field load.
+**Q: Do I need to call `initialize()`?**
+A: No, registration is automatic on static field load.
 
-**Can I use MosbergAPI with other mod loaders?**
-No, Fabric/Quilt only.
+**Q: Can I use MosbergAPI with other mod loaders?**
+A: No, Fabric/Quilt only.
 
-**How do I update MosbergAPI?**
-Change the version in `build.gradle` and run `./gradlew build --refresh-dependencies`.
+**Q: How do I update MosbergAPI?**
+A: Change the version in `build.gradle` and run `./gradlew build --refresh-dependencies`.
 
-**Blocks not registering?**
-Ensure registry classes are loaded in your mod initializer:
+**Q: Blocks not registering?**
+A: Ensure registry classes are loaded in your mod initializer:
 
 ```java
 @Override
@@ -158,17 +160,17 @@ public void onInitialize() {
 }
 ```
 
-**Data generation not working?**
-Add the data generator entrypoint in `fabric.mod.json`.
+**Q: Data generation not working?**
+A: Add the data generator entrypoint in `fabric.mod.json`.
 
-**"Block id not set" error?**
-Register blocks immediately when creating them, not as static finals before registration.
+**Q: "Block id not set" error?**
+A: Register blocks immediately when creating them, not as static finals before registration.
 
 ---
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://raw.githubusercontent.com/Mosberg/mosbergapi/main/CONTRIBUTING.md) for code style, PR process, and testing.
+See [CONTRIBUTING.md](https://raw.githubusercontent.com/Mosberg/mosbergapi/main/CONTRIBUTING.md) for code style, PR process, and testing guidelines.
 
 ## Changelog
 
@@ -177,4 +179,3 @@ See [CHANGELOG.md](https://raw.githubusercontent.com/Mosberg/mosbergapi/main/CHA
 ## License
 
 MosbergAPI is MIT licensed. See [LICENSE](https://github.com/Mosberg/mosbergapi/blob/main/LICENSE).
-**Q: My blocks aren't registering**
