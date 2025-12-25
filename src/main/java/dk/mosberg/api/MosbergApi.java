@@ -2,10 +2,10 @@ package dk.mosberg.api;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import dk.mosberg.api.command.MosbergCommands;
 import dk.mosberg.api.registry.MosbergAttributes;
 import dk.mosberg.api.registry.MosbergBlockEntities;
 import dk.mosberg.api.registry.MosbergBlocks;
-import dk.mosberg.api.registry.MosbergCommands;
 import dk.mosberg.api.registry.MosbergDamageTypes;
 import dk.mosberg.api.registry.MosbergDataComponents;
 import dk.mosberg.api.registry.MosbergEnchantments;
@@ -74,7 +74,7 @@ public class MosbergApi implements ModInitializer {
 		MosbergTags.initialize(); // Tags
 
 		// Command registration
-		MosbergCommands.initialize(); // Commands
+		MosbergCommands.register(); // Commands
 
 		// Central registry (general purpose helper)
 		MosbergRegistries.initialize();
